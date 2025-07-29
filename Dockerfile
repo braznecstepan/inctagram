@@ -1,5 +1,6 @@
 #Устанавливаем зависимости
 FROM node:20.11-alpine as dependencies
+RUN corepack enable
 WORKDIR /app
 COPY package*.json ./
 RUN pnpm install
@@ -8,6 +9,7 @@ RUN pnpm install
 #Кэширование зависимостей — если файлы в проекте изменились,
 #но package.json остался неизменным, то стейдж с установкой зависимостей повторно не выполняется, что экономит время.
 FROM node:20.11-alpine as builder
+RUN corepack enable
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
@@ -15,6 +17,7 @@ RUN pnpm run build:production
 
 #Стейдж запуска
 FROM node:20.11-alpine as runner
+RUN corepack enable
 WORKDIR /app
 ENV NODE_ENV production
 COPY --from=builder /app/ ./
