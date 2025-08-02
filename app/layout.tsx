@@ -1,21 +1,7 @@
 import type { Metadata } from 'next'
-
 import React from 'react'
-
-import { Geist, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
-
-import '@/app/globals.css'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import '@/shared/ui/styles/index.scss'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -42,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <header style={{ display: 'flex', gap: '30px', padding: '30px' }}>
           {pages.map(page => (
             <Link key={page} href={`/${page.toLowerCase()}`}>
