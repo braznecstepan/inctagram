@@ -20,7 +20,8 @@ const eslintConfig = [
             "prettier"
         ],
         rules: {
-            'no-console': ['warn', {allow: ['warn', 'error']}]
+            'no-console': ['warn', {allow: ['warn', 'error']}],
+            'no-duplicate-imports': 'off',
         }
     }),
 ];
