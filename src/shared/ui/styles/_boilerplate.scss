@@ -1,0 +1,40 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+
+body {
+  font-family: var(--font-famil-primary), sans-serif;
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  background: var(--color-dark-900);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
