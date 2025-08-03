@@ -22,6 +22,7 @@ const eslintConfig = [
         rules: {
             'no-console': ['warn', {allow: ['warn', 'error']}],
             'no-duplicate-imports': 'off',
+            'perfectionist/sort-imports': 'off'
         }
     }),
 ];

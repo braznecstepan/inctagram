@@ -8,9 +8,10 @@
     "build:production": "pnpm run build",
     "test": "echo \"Tests are disabled for now\" && exit 0",
     "start": "next start",
-    "lint:fix": "next lint --fix",
+    "lint": "next lint && pnpm run stylelint",
+    "lint:fix": "next lint --fix && pnpm run stylelint:fix",
     "stylelint:fix": "stylelint --fix \"src/**/*.{scss,css}\" --allow-empty-input",
-    "lint": "pnpm run lint:fix && pnpm run stylelint:fix",
+    "stylelint": "stylelint \"src/**/*.{scss,css}\" --allow-empty-input",
     "format": "prettier --write \"src/**/*\""
   },
   "dependencies": {
