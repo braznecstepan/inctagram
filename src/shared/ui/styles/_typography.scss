@@ -1,20 +1,91 @@
+@use "colors" as colors;
+
+
 :root {
 
-  --font-famil-primary: "Inter";
+  --font-family-primary: "Inter";
 
   --line-height-s: 16px;
   --line-height-m: 24px;
   --line-height-l: 36px;
 
-  --font-size-xs: 0.75rem;
-  --font-size-s: 0.875rem;
-  --font-size-m: 1rem;
-  --font-size-l: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-xxl: 1.625rem;
+  --font-size-xs: 12px;
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 26px;
 
   --font-weight-400: 400;
   --font-weight-500: 500;
   --font-weight-600: 600;
   --font-weight-700: 700;
 }
+
+@mixin typography($fontSize, $fontWeight, $lineHeight,$color:colors.$text-color) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+.uik_large {
+  @include typography(var(--font-size-xxl), var(--font-weight-600), var(--line-height-l));
+}
+
+.uik_h1-typography {
+  @include typography(var(--font-size-xl), var(--font-weight-700), var(--line-height-l));
+}
+
+.uik_h2-typography {
+  @include typography(var(--font-size-l), var(--font-weight-700), var(--line-height-m));
+}
+
+.uik_h3-typography {
+  @include typography(var(--font-size-m), var(--font-weight-600), var(--line-height-s));
+}
+
+.uik_regular-text-16 {
+  @include typography(var(--font-size-m), var(--font-weight-400), var(--line-height-m));
+}
+
+.uik_bold-text-16 {
+  @include typography(var(--font-size-m), var(--font-weight-700), var(--line-height-m));
+}
+
+.uik_regular-text-14 {
+  @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
+}
+
+.uik_medium-text-14 {
+  @include typography(var(--font-size-s), var(--font-weight-500), var(--line-height-m));
+}
+
+.uik_bold-text-14 {
+  @include typography(var(--font-size-s), var(--font-weight-700), var(--line-height-m));
+}
+
+.uik_small-text {
+  @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s));
+}
+
+.uik_semi-bold-small-text {
+  @include typography(var(--font-size-xs), var(--font-weight-600), var(--line-height-s));
+}
+
+.uik_regular-link {
+  @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m), colors.$link-color);
+}
+
+.uik_small-link {
+  @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s), colors.$link-color);
+}
+
+
+
+
+
+
+
+
+
