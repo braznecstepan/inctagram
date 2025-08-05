@@ -4,6 +4,7 @@ export function Auth() {
   return (
     <>
       <h1>Auth Page</h1>
+        TEST
       <Login />
       <Logout />
     </>
