@@ -1,9 +1,7 @@
-@use "colors" as colors;
-
+@use 'colors' as colors;
 
 :root {
-
-  --font-family-primary: "Inter";
+  --font-family-primary: 'Inter';
 
   --line-height-s: 16px;
   --line-height-m: 24px;
@@ -22,7 +20,7 @@
   --font-weight-700: 700;
 }
 
-@mixin typography($fontSize, $fontWeight, $lineHeight,$color:colors.$text-color) {
+@mixin typography($fontSize, $fontWeight, $lineHeight, $color: colors.$text-color) {
   font-size: $fontSize;
   font-weight: $fontWeight;
   line-height: $lineHeight;
@@ -74,18 +72,28 @@
 }
 
 .uik_regular-link {
-  @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m), colors.$link-color);
+  @include typography(
+    var(--font-size-s),
+    var(--font-weight-400),
+    var(--line-height-m),
+    colors.$link-color
+  );
 }
 
 .uik_small-link {
-  @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s), colors.$link-color);
+  @include typography(
+    var(--font-size-xs),
+    var(--font-weight-400),
+    var(--line-height-s),
+    colors.$link-color
+  );
 }
 
-
-
-
-
-
-
-
-
+.uik_typography-error {
+  @include typography(
+    var(--font-size-s),
+    var(--font-weight-400),
+    var(--line-height-m),
+    var(--color-danger-500)
+  );
+}

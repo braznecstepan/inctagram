@@ -1,4 +1,4 @@
-@use "typography" as t;
+@use 'typography' as t;
 
 @import 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
 
@@ -16,7 +16,6 @@ body {
   padding: 0;
 }
 
-
 input,
 button,
 select,
@@ -30,14 +29,12 @@ option {
   color: inherit;
 }
 
-
 body {
   font-family: var(--font-family-primary), sans-serif;
   line-height: var(--line-height-m);
   color: var(--color-light-100);
   background: var(--color-dark-900);
 }
-
 
 a {
   color: inherit;
@@ -53,5 +50,5 @@ h2 {
 }
 
 h3 {
-  @include t.typography(var(--font-size-m), var(--font-weight-600), var(--line-height-s))
+  @include t.typography(var(--font-size-m), var(--font-weight-600), var(--line-height-s));
 }
