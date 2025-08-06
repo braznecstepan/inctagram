@@ -24,7 +24,6 @@ export const TextField: FC<TextFieldProps> = ({
   onEndIconClick,
   onEnter,
   search,
-  value,
   className,
   id,
   onKeyDown,

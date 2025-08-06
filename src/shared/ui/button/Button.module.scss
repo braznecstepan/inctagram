@@ -22,7 +22,6 @@
 .primary {
   background-color: var(--color-accent-500);
 
-
   &:hover {
     background-color: var(--color-accent-100);
   }
@@ -46,7 +45,7 @@
   background-color: var(--color-dark-300);
 
   &:hover {
-    background-color: var(--color-dark-100)
+    background-color: var(--color-dark-100);
   }
 
   &:active {
@@ -62,7 +61,6 @@
     background-color: var(--color-dark-500);
   }
 }
-
 
 .outlined {
   color: var(--color-accent-500);
