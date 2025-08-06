@@ -3,6 +3,7 @@ import { useGetId } from '@/shared/ui/text-field/useGetId'
 import s from './TextField.module.scss'
 import { clsx } from 'clsx'
 import { Search } from '@/shared/ui/icons'
+import { Label } from '@/shared/ui'
 
 export type TextFieldProps = {
   errorMessage?: string
@@ -63,9 +64,12 @@ export const TextField: FC<TextFieldProps> = ({
   return (
     <div className={classNames.root}>
       {label && (
-        <label className={classNames.label} htmlFor={textFieldId}>
-          {label}
-        </label>
+        <Label
+          className={classNames.label}
+          htmlFor={textFieldId}
+          label={label}
+          required={required}
+        />
       )}
       <div className={classNames.inputContainer}>
         {!!iconStart && <span className={classNames.iconStart}>{iconStart}</span>}
