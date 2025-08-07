@@ -35,6 +35,10 @@
   flex-direction: column;
 }
 
+.username {
+  margin-top: 24px;
+}
+
 .email {
   margin-top: 24px;
 }
@@ -43,21 +47,25 @@
   margin-top: 24px;
 }
 
-.forgotPassword {
-  @include t.uik-regular-link;
-
-  margin: 36px 0 0 auto;
-  padding-right: 0;
-  color: var(--color-light-900);
-
-  &:hover {
-    color: var(--color-light-900);
-    text-decoration: underline;
-  }
+.passwordConfirmation {
+  margin-top: 24px;
 }
 
-.signIn {
-  margin-top: 24px;
+.compliance {
+  @include t.uik-small-text;
+  padding: 10px 0;
+  margin: 12px auto 0 auto;
+}
+
+.termsOfService,
+.privacyPolicy {
+  @include t.uik-small-link;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.signUp {
+  margin-top: 12px;
 }
 
 .question {
@@ -67,7 +75,7 @@
   text-align: center;
 }
 
-.signUp {
+.signIn {
   margin: 6px auto 0;
 
   &:hover {

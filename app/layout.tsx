@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 const pages = [
   'Auth/Sign-in',
+  'Auth/Sign-up',
   'Create_Publication',
   'Favorites',
   'Feed',
