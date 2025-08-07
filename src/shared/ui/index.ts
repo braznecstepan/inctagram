@@ -1,6 +1,6 @@
 export { DropDown } from './drop_down/DropDown'
 export { Button } from './button/Button'
-export { TextField } from './text-field/TextField'
+export { TextField } from './text_field/TextField'
 export { Label } from './label/Label'
 export { Modal } from './modal/Modal'
 export { Card } from './card/Card'

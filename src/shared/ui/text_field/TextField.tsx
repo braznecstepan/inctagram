@@ -1,5 +1,5 @@
 import { ComponentProps, FC, KeyboardEvent, ReactNode } from 'react'
-import { useGetId } from '@/shared/ui/text-field/useGetId'
+import { useGetId } from './useGetId'
 import s from './TextField.module.scss'
 import { clsx } from 'clsx'
 import { Search } from '@/shared/ui/icons'
