@@ -53,7 +53,7 @@ export const TextField: FC<TextFieldProps> = ({
     iconEnd: clsx(s.iconEnd, disabled && s.disabled),
     iconStart: clsx(s.iconStart, showError && s.error, disabled && s.disabled),
     input: clsx(s.input, showError && s.error),
-    error: clsx('uik_typography-error'),
+    errorText: clsx(s.errorText),
   }
 
   const dataIconStart = iconStart ? 'start' : ''
@@ -89,7 +89,7 @@ export const TextField: FC<TextFieldProps> = ({
           </span>
         )}
       </div>
-      {showError && <span className={classNames.error}>{errorMessage}</span>}
+      {showError && <span className={classNames.errorText}>{errorMessage}</span>}
     </div>
   )
 }

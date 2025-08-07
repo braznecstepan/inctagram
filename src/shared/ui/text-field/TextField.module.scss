@@ -1,3 +1,5 @@
+@use 'src/shared/ui/styles/typography' as t;
+
 .box {
   display: flex;
   flex-direction: column;
@@ -130,4 +132,8 @@
 
 .disabled {
   color: var(--color-dark-100);
+}
+
+.errorText {
+  @include t.uik_typography-error();
 }

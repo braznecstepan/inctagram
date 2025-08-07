@@ -1,8 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import clsx from 'clsx'
 import { ComponentPropsWithoutRef } from 'react'
 import s from './Modal.module.scss'
 import { Close } from '@/shared/ui/icons'
+import { clsx } from 'clsx'
 
 type ModalSize = 'lg' | 'md' | 'sm'
 
