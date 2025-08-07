@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const pages = [
-  'Auth',
+  'Auth/Sign-in',
   'Create_Publication',
   'Favorites',
   'Feed',

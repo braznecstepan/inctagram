@@ -39,8 +39,7 @@ export const Modal = ({
           </Dialog.Close>
         </div>
         <hr className={s.Separator} />
-        <div className={s.contentBox}>{children}</div>
-        {children}
+        <div className={s.ContentBox}>{children}</div>
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>

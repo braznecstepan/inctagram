@@ -2,10 +2,10 @@ import { EyeOffOutline, EyeOutline, GithubSvgrepoCom31, GoogleSvgrepoCom1 } from
 import { FormEvent, useState } from 'react'
 import { Button, Card, TextField } from '@/shared/ui'
 
-import s from './Auth.module.scss'
+import s from './SignIn.module.scss'
 import Link from 'next/link'
 
-export function Auth() {
+export function SignIn() {
   const [passwordMode, setPasswordMode] = useState<boolean>(true)
 
   const toggleMode = () => {
