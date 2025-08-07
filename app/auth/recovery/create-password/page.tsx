@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Create Password</div>
+export default function page() {
+  return <div>Create Password</div>
+}

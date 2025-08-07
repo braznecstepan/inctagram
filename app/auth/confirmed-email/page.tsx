@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Confirmed Email</div>
+export default function page() {
+  return <div>Confirmed Email</div>
+}

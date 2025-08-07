@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Recovery</div>
+export default function page() {
+  return <div>Recovery</div>
+}

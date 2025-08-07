@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Expired Link</div>
+export default function page() {
+  return <div>Expired Link</div>
+}
