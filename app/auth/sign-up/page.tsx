@@ -1,2 +1,2 @@
 'use client'
-export { SignIn as default } from '@/pages/auth'
+export { SignUp as default } from '@/pages/auth'
