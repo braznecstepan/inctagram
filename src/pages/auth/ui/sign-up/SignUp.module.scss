@@ -53,15 +53,17 @@
 
 .compliance {
   @include t.uik-small-text;
+
+  margin: 12px auto 0;
   padding: 10px 0;
-  margin: 12px auto 0 auto;
 }
 
 .termsOfService,
 .privacyPolicy {
   @include t.uik-small-link;
-  text-decoration: underline;
+
   padding: 0;
+  text-decoration: underline;
 }
 
 .signUp {

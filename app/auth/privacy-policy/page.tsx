@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Privacy Policy</div>
+export default function page() {
+  return <div>Privacy Policy</div>
+}

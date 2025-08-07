@@ -1,2 +1,4 @@
 'use client'
-export default () => <div>Terms Of Service</div>
+export default function page() {
+  return <div>Terms Of Service</div>
+}
