@@ -7,51 +7,51 @@
   color: $color;
 }
 
-@mixin uik_large {
+@mixin uik-large {
   @include typography(var(--font-size-xxl), var(--font-weight-600), var(--line-height-l));
 }
 
-@mixin uik_h1-typography {
+@mixin uik-h1-typography {
   @include typography(var(--font-size-xl), var(--font-weight-700), var(--line-height-l));
 }
 
-@mixin uik_h2-typography {
+@mixin uik-h2-typography {
   @include typography(var(--font-size-l), var(--font-weight-700), var(--line-height-m));
 }
 
-@mixin uik_h3-typography {
+@mixin uik-h3-typography {
   @include typography(var(--font-size-m), var(--font-weight-600), var(--line-height-s));
 }
 
-@mixin uik_regular-text-16 {
+@mixin uik-regular-text-16 {
   @include typography(var(--font-size-m), var(--font-weight-400), var(--line-height-m));
 }
 
-@mixin uik_bold-text-16 {
+@mixin uik-bold-text-16 {
   @include typography(var(--font-size-m), var(--font-weight-700), var(--line-height-m));
 }
 
-@mixin uik_regular-text-14 {
+@mixin uik-regular-text-14 {
   @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
 }
 
-@mixin uik_medium-text-14 {
+@mixin uik-medium-text-14 {
   @include typography(var(--font-size-s), var(--font-weight-500), var(--line-height-m));
 }
 
-@mixin uik_bold-text-14 {
+@mixin uik-bold-text-14 {
   @include typography(var(--font-size-s), var(--font-weight-700), var(--line-height-m));
 }
 
-@mixin uik_small-text {
+@mixin uik-small-text {
   @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s));
 }
 
-@mixin uik_semi-bold-small-text {
+@mixin uik-semi-bold-small-text {
   @include typography(var(--font-size-xs), var(--font-weight-600), var(--line-height-s));
 }
 
-@mixin uik_regular-link {
+@mixin uik-regular-link {
   @include typography(
     var(--font-size-s),
     var(--font-weight-400),
@@ -60,7 +60,7 @@
   );
 }
 
-@mixin uik_small-link {
+@mixin uik-small-link {
   @include typography(
     var(--font-size-xs),
     var(--font-weight-400),
@@ -69,7 +69,7 @@
   );
 }
 
-@mixin uik_typography-error {
+@mixin uik-typography-error {
   @include typography(
     var(--font-size-s),
     var(--font-weight-400),
