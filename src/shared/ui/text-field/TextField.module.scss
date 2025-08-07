@@ -135,5 +135,5 @@
 }
 
 .errorText {
-  @include t.uik_typography-error();
+  @include t.uik-typography-error;
 }

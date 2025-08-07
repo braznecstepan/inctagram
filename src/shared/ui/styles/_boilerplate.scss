@@ -42,13 +42,13 @@ a {
 }
 
 h1 {
-  @include t.uik_h1-typography();
+  @include t.uik-h1-typography;
 }
 
 h2 {
-  @include t.uik_h2-typography();
+  @include t.uik-h2-typography;
 }
 
 h3 {
-  @include t.uik_h3-typography();
+  @include t.uik-h3-typography;
 }

@@ -1,0 +1,76 @@
+@use 'src/shared/ui/styles/typography' as t;
+
+.box {
+  display: flex;
+  justify-content: center;
+  margin: 36px 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 378px;
+}
+
+.title {
+  @include t.uik-h1-typography;
+
+  text-align: center;
+}
+
+.icons {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  margin-top: 13px;
+
+  svg {
+    width: 36px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.emailInput {
+  margin-top: 24px;
+}
+
+.passwordInput {
+  margin-top: 24px;
+}
+
+.forgotPassword {
+  @include t.uik-regular-link;
+
+  margin: 36px 0 0 auto;
+  padding-right: 0;
+  color: var(--color-light-900);
+
+  &:hover {
+    color: var(--color-light-900);
+    text-decoration: underline;
+  }
+}
+
+.signIn {
+  margin-top: 24px;
+}
+
+.question {
+  @include t.uik-regular-text-16;
+
+  margin-top: 18px;
+  text-align: center;
+}
+
+.signUp {
+  margin: 6px auto 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
