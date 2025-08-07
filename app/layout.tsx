@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import Link from 'next/link'
+import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
 
 export const metadata: Metadata = {
