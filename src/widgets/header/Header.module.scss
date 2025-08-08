@@ -34,7 +34,11 @@
 }
 
 .logo {
-  @include t.uik-large
+  all: unset;
+  cursor: pointer;
+  h1{
+    @include t.uik-large;
+  }
 }
 
 .selectBox {
@@ -42,6 +46,7 @@
   align-items: center;
 
   svg {
+    margin-top: 6px;
     margin-right: 45px;
     cursor: pointer;
   }
