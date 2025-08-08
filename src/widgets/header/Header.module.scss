@@ -1,0 +1,40 @@
+@use 'src/shared/ui/styles/typography' as t;
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index:var(--z-index-header);
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 60px;
+}
+
+.buttonWrapper {
+  button + button {
+    margin-left: 24px;
+  }
+
+  button {
+    padding: 0;
+    width: 100px;
+  }
+  @include t.uik-h3-typography
+}
+
+.logo{
+  @include t.uik-large
+}
