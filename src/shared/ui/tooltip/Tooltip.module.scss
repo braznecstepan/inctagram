@@ -1,0 +1,42 @@
+.content {
+  position: relative;
+  right: 140px;
+  z-index: var(--z-index-modal-content);
+  width: 370px;
+  padding: 12px;
+  font-size: var(--font-size-s);
+  line-height: 24px;
+  color: var(--color-light-100);
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-radius: var(--border-radius-m);
+}
+
+.infoIcon {
+  color: var(--color-light-100);
+  transition: var(--transtition-duration-basic) color;
+}
+
+.iconButton {
+  all: unset;
+  &:hover .infoIcon,
+  &:focus .infoIcon {
+    color: var(--color-accent-100);
+  }
+}
+
+.arrow {
+  position: absolute;
+  ;
+  top: -3px;
+  right:111px;
+  transform: rotate(45deg);
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+  border-top: none;
+  border-left: none;
+}
