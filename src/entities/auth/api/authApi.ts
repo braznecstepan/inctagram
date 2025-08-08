@@ -1,6 +1,6 @@
-import { baseApi } from '@/shared/api/baseApi'
+import { baseApi } from '@/shared/api'
 
 export const authApi = baseApi.injectEndpoints({
   // eslint-disable-next-line
-  endpoints: builder => ({}),
+  endpoints: _ => ({}),
 })
