@@ -3,7 +3,9 @@
   right: 140px;
   z-index: var(--z-index-modal-content);
   width: 370px;
-  padding: 12px;
+  max-width: 370px;
+  height: 100%;
+  padding: 12px 0 12px 12px;
   font-size: var(--font-size-s);
   line-height: 24px;
   color: var(--color-light-100);
@@ -19,6 +21,7 @@
 
 .iconButton {
   all: unset;
+  text-align: center;
   &:hover .infoIcon,
   &:focus .infoIcon {
     color: var(--color-accent-100);
@@ -26,10 +29,9 @@
 }
 
 .arrow {
-  position: absolute;
-  ;
+  position: absolute;;
   top: -3px;
-  right:111px;
+  right: 111px;
   transform: rotate(45deg);
 
   width: 8px;
