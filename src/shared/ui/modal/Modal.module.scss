@@ -19,6 +19,8 @@
 
   overflow: auto;
 
+  /* margin-left: 15px and margin-right: 15px for fixed element */
+  width: calc(100% - 30px);
   border-radius: var(--border-radius-s);
 
   background-color: var(--color-dark-300);
@@ -31,15 +33,15 @@
 }
 
 .sm {
-  width: 378px;
+  max-width: 378px;
 }
 
 .md {
-  width: 492px;
+  max-width: 492px;
 }
 
 .lg {
-  width: 972px;
+  max-width: 972px;
 }
 
 .Header {

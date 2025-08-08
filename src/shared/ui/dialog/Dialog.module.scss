@@ -1,0 +1,16 @@
+.buttonsBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  min-width: 96px;
+}
+
+.hasCancelButton {
+  gap: 24px;
+}
+
+.mobile {
+  flex-direction: column;
+}
