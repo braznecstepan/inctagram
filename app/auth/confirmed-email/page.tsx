@@ -1,4 +1,2 @@
 'use client'
-export default function page() {
-  return <div>Confirmed Email</div>
-}
+export { ConfirmedEmail as default } from '@/pages/auth'
