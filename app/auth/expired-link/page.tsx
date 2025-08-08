@@ -1,4 +1,2 @@
 'use client'
-export default function page() {
-  return <div>Expired Link</div>
-}
+export { ExpiredLink as default } from '@/pages/auth'

@@ -1,3 +1,4 @@
 export { SignIn } from './ui/sign_in/SignIn'
 export { SignUp } from './ui/sign_up/SignUp'
 export { ConfirmedEmail } from './ui/confirmed_email/ConfirmedEmail'
+export { ExpiredLink } from './ui/expired_link/ExpiredLink'
