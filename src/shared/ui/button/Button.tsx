@@ -3,8 +3,10 @@ import s from './Button.module.scss'
 import { Slot } from '@radix-ui/react-slot'
 import { clsx } from 'clsx'
 
+export type ButtonVariant = 'primary' | 'secondary' | 'outlined' | 'text'
+
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'outlined' | 'text'
+  variant?: ButtonVariant
   asChild?: boolean
   fullWidth?: boolean
 } & ComponentPropsWithRef<'button'>

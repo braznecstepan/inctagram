@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 
 type ModalSize = 'lg' | 'md' | 'sm'
 
-type Props = {
+export type ModalProps = {
   open: boolean
   showCloseButton?: boolean
   onClose?: () => void
@@ -23,7 +23,7 @@ export const Modal = ({
   className,
   open = false,
   ...rest
-}: Props) => (
+}: ModalProps) => (
   <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
     <Dialog.Portal>
       <Dialog.Overlay className={s.Overlay} />

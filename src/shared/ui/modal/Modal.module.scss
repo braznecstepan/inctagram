@@ -17,6 +17,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
+  /* margin-left: 15px and margin-right: 15px for fixed element */
+  width: calc(100% - 30px);
+
   overflow: auto;
 
   border-radius: var(--border-radius-s);
@@ -31,15 +34,15 @@
 }
 
 .sm {
-  width: 378px;
+  max-width: 378px;
 }
 
 .md {
-  width: 492px;
+  max-width: 492px;
 }
 
 .lg {
-  width: 972px;
+  max-width: 972px;
 }
 
 .Header {
