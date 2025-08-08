@@ -4,6 +4,7 @@ import Link from 'next/link'
 import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
 import {Header} from '@/widgets/header/Header';
+import StoreProvider from '@/app/storeProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
