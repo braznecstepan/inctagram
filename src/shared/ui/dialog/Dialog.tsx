@@ -1,7 +1,6 @@
 import { Button, Modal } from '@/shared/ui'
 
 import s from './Dialog.module.scss'
-import { useDeviceType } from '@/shared/lib/hooks'
 import { clsx } from 'clsx'
 import { FC } from 'react'
 import { ModalProps } from '@/shared/ui/modal/Modal'
@@ -32,7 +31,6 @@ export const Dialog: FC<DialogProps> = ({
   buttonsClass,
   ...rest
 }) => {
-  const { isMobile } = useDeviceType()
   const { onClose } = rest
   const showCancelButton = !!cancelButtonText
 
@@ -49,12 +47,7 @@ export const Dialog: FC<DialogProps> = ({
   }
 
   const classnames = {
-    buttonsBox: clsx(
-      s.buttonsBox,
-      showCancelButton && s.hasCancelButton,
-      isMobile && s.mobile,
-      buttonsClass
-    ),
+    buttonsBox: clsx(s.buttonsBox, showCancelButton && s.hasCancelButton, buttonsClass),
     button: s.button,
   }
 
@@ -70,7 +63,6 @@ export const Dialog: FC<DialogProps> = ({
       <div className={classnames.buttonsBox}>
         {
           <Button
-            fullWidth={isMobile}
             onClick={handleConfirmButtonClick}
             variant={confirmButtonVariant}
             className={classnames.button}
@@ -80,7 +72,6 @@ export const Dialog: FC<DialogProps> = ({
         }
         {showCancelButton && (
           <Button
-            fullWidth={isMobile}
             onClick={handleCancelButtonClick}
             variant={cancelButtonVariant}
             className={classnames.button}
