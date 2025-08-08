@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
-import StoreProvider from '@/app/storeProvider'
+import {Header} from '@/widgets/header/Header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -32,16 +32,15 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body>
-        <StoreProvider>
-          <header style={{ display: 'flex', gap: '30px', padding: '30px' }}>
-            {pages.map(page => (
-              <Link key={page} href={`/${page.toLowerCase()}`}>
-                <h3>{page}</h3>
-              </Link>
-            ))}
-          </header>
-          {children}
-        </StoreProvider>
+      <Header newMessage={true}/>
+        {/*<header style={{ display: 'flex', gap: '30px', padding: '30px' }}>*/}
+        {/*  {pages.map(page => (*/}
+        {/*    <Link key={page} href={`/${page.toLowerCase()}`}>*/}
+        {/*      <h3>{page}</h3>*/}
+        {/*    </Link>*/}
+        {/*  ))}*/}
+        {/*</header>*/}
+        {children}
       </body>
     </html>
   )
