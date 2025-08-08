@@ -1,7 +1,7 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import * as process from 'node:process'
+import process from 'process'
 import { redirect } from 'next/navigation'
 
 const mutex = new Mutex()
@@ -39,6 +39,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           },
           api,
           extraOptions
+          // eslint-disable-next-line
         )) as any
 
         if (refreshResult.data) {
