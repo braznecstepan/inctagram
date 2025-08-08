@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector, useStore } from 'react-redux'
-import { baseApi } from '@/app/baseApi'
-import { appReducer, appSlice } from '@/app/app-slice'
+import {baseApi, baseReducer, baseSlice} from '@/shared';
+
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      [appSlice.name]: appReducer,
+      [baseSlice.name]: baseReducer,
       [baseApi.reducerPath]: baseApi.reducer,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
