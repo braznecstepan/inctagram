@@ -3,20 +3,16 @@ import { ConfirmedImage } from '@/shared/ui/images'
 import { Button } from '@/shared/ui'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
-import { useDeviceType } from '@/shared/lib/hooks'
-import { clsx } from 'clsx'
 import s from './ConfirmedEmail.module.scss'
 
 export function ConfirmedEmail() {
-  const { isMobile } = useDeviceType()
-
   const classnames = {
-    box: clsx(s.box, isMobile && s.mobile),
+    box: s.box,
     title: s.title,
-    message: clsx(s.message, isMobile && s.message),
-    buttonImageBox: clsx(s.buttonImageBox, isMobile && s.mobile),
-    signIn: clsx(s.signIn, isMobile && s.mobile),
-    image: clsx(s.image, isMobile && s.mobile),
+    message: s.message,
+    buttonImageBox: s.buttonImageBox,
+    signIn: s.signIn,
+    image: s.image,
   }
 
   return (
