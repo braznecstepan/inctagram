@@ -1,10 +1,5 @@
 @use 'src/shared/ui/styles/typography' as t;
 
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-}
 
 .header {
   position: fixed;
@@ -12,7 +7,8 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index:var(--z-index-header);
+  z-index: var(--z-index-header);
+
 }
 
 .headerWrapper {
@@ -21,6 +17,7 @@
   align-items: center;
   height: 60px;
   padding: 0 60px;
+  border-bottom: 1px solid var(--color-dark-100);
 }
 
 .buttonWrapper {
@@ -32,9 +29,25 @@
     padding: 0;
     width: 100px;
   }
+
   @include t.uik-h3-typography
 }
 
-.logo{
+.logo {
   @include t.uik-large
+}
+
+.selectBox {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 45px;
+    cursor: pointer;
+  }
+
+  select {
+    margin-right: 36px;
+    color: black;
+  }
 }
