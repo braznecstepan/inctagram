@@ -5,7 +5,7 @@ import OutlineBell from '@/shared/ui/icons/OutlineBell'
 
 type Props = {
   newMessage?: boolean
-  isAuth: boolean
+  isAuth?: boolean
 }
 
 export const Header = ({ newMessage, isAuth }: Props) => {
