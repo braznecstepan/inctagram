@@ -1,3 +1,124 @@
-export const DropDown = () => {
-  return <h1>DropDown</h1>
+import React from 'react'
+
+import clsx from 'clsx'
+import * as Select from '@radix-ui/react-select'
+
+import s from './DropDown.module.scss'
+
+export type DropDownOption = {
+  value: string
+  label: string
+  disabled?: boolean
 }
+
+export type DropDownProps = {
+  options: DropDownOption[]
+  value?: string
+  defaultValue?: string
+  placeholder?: string
+  disabled?: boolean
+  label?: string
+  error?: string
+  className?: string
+  onValueChange?: (value: string) => void
+}
+
+export const DropDown: React.FC<DropDownProps> = ({
+  options,
+  value,
+  defaultValue,
+  placeholder = 'Select an option...',
+  disabled = false,
+  label,
+  error,
+  className,
+  onValueChange,
+}) => {
+  return (
+    <div className={clsx(s.dropdown, className)}>
+      {label && <label className={s.label}>{label}</label>}
+
+      <Select.Root
+        value={value}
+        defaultValue={defaultValue}
+        onValueChange={onValueChange}
+        disabled={disabled}
+      >
+        <Select.Trigger
+          className={clsx(s.trigger, {
+            [s.error]: error,
+            [s.disabled]: disabled,
+          })}
+          aria-label={label}
+        >
+          <Select.Value placeholder={placeholder} />
+          <Select.Icon className={s.icon}>
+            <ChevronDownIcon />
+          </Select.Icon>
+        </Select.Trigger>
+
+        <Select.Portal>
+          <Select.Content
+            className={s.content}
+            position="popper"
+            side="bottom"
+            align="start"
+            sideOffset={4}
+          >
+            <Select.ScrollUpButton className={s.scrollButton}>
+              <ChevronUpIcon />
+            </Select.ScrollUpButton>
+
+            <Select.Viewport className={s.viewport}>
+              {options.length === 0 ? (
+                <div className={s.emptyState}>No options available</div>
+              ) : (
+                options.map(option => (
+                  <Select.Item
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                    className={clsx(s.item, {
+                      [s.itemDisabled]: option.disabled,
+                    })}
+                  >
+                    <Select.ItemText>{option.label}</Select.ItemText>
+                  </Select.Item>
+                ))
+              )}
+            </Select.Viewport>
+
+            <Select.ScrollDownButton className={s.scrollButton}>
+              <ChevronDownIcon />
+            </Select.ScrollDownButton>
+          </Select.Content>
+        </Select.Portal>
+      </Select.Root>
+
+      {error && <div className={s.errorMessage}>{error}</div>}
+    </div>
+  )
+}
+
+// Icons
+const ChevronDownIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+    <path
+      d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+      fill="currentColor"
+      fillRule="evenodd"
+      clipRule="evenodd"
+    />
+  </svg>
+)
+
+const ChevronUpIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+    <path
+      d="M3.13523 8.84197C3.3241 9.04343 3.64052 9.05363 3.84197 8.86477L7.5 5.43536L11.158 8.86477C11.3595 9.05363 11.6759 9.04343 11.8648 8.84197C12.0536 8.64051 12.0434 8.32409 11.842 8.13523L7.84197 4.38523C7.64964 4.20492 7.35036 4.20492 7.15803 4.38523L3.15803 8.13523C2.95657 8.32409 2.94637 8.64051 3.13523 8.84197Z"
+      fill="currentColor"
+      fillRule="evenodd"
+      clipRule="evenodd"
+    />
+  </svg>
+)
