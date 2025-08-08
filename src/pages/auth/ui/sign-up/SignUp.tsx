@@ -5,6 +5,7 @@ import { Button, Card, TextField } from '@/shared/ui'
 import s from './SignUp.module.scss'
 import Link from 'next/link'
 import { usePasswordMode } from '@/pages/auth/lib'
+import { AUTH_ROUTES } from '@/shared/lib/routes'
 
 export function SignUp() {
   const { mode: passwordMode, toggleMode: togglePasswordMode } = usePasswordMode()
@@ -40,10 +41,10 @@ export function SignUp() {
         <span className={classnames.title}>Sign Up</span>
 
         <div className={classnames.icons}>
-          <Link href={'/auth/sign-up'}>
+          <Link href={AUTH_ROUTES.SIGN_UP}>
             <GoogleSvgrepoCom1 />
           </Link>
-          <Link href={'/auth/sign-up'}>
+          <Link href={AUTH_ROUTES.SIGN_UP}>
             <GithubSvgrepoCom31 />
           </Link>
         </div>
@@ -78,11 +79,11 @@ export function SignUp() {
           <span className={classnames.compliance}>
             I agree to the{' '}
             <Button variant={'text'} className={classnames.termsOfServices} asChild>
-              <Link href={'/auth/terms-of-service'}>Terms of Service</Link>
+              <Link href={AUTH_ROUTES.TERMS_OF_SERVICE}>Terms of Service</Link>
             </Button>{' '}
             and{' '}
             <Button variant={'text'} className={classnames.privacyPolicy} asChild>
-              <Link href={'/auth/privacy-policy'}>Privacy Policy</Link>
+              <Link href={AUTH_ROUTES.PRIVACY_POLICY}>Privacy Policy</Link>
             </Button>
           </span>
 
@@ -94,7 +95,7 @@ export function SignUp() {
         <span className={classnames.question}>{`Do you have an account?`}</span>
 
         <Button variant={'text'} className={classnames.signIn} asChild>
-          <Link href={'/auth/sign-in'}>Sign In</Link>
+          <Link href={AUTH_ROUTES.SIGN_IN}>Sign In</Link>
         </Button>
       </Card>
     </div>

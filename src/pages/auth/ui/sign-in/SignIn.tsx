@@ -5,6 +5,7 @@ import { Button, Card, TextField } from '@/shared/ui'
 import s from './SignIn.module.scss'
 import Link from 'next/link'
 import { usePasswordMode } from '@/pages/auth/lib'
+import { AUTH_ROUTES } from '@/shared/lib/routes'
 
 export function SignIn() {
   const { mode, toggleMode } = usePasswordMode()
@@ -34,10 +35,10 @@ export function SignIn() {
         <span className={classnames.title}>Sign In</span>
 
         <div className={classnames.icons}>
-          <Link href={'/auth/sign-in'}>
+          <Link href={AUTH_ROUTES.SIGN_IN}>
             <GoogleSvgrepoCom1 />
           </Link>
-          <Link href={'/auth/sign-in'}>
+          <Link href={AUTH_ROUTES.SIGN_IN}>
             <GithubSvgrepoCom31 />
           </Link>
         </div>
@@ -59,7 +60,7 @@ export function SignIn() {
           />
 
           <Button variant={'text'} className={classnames.forgotPassword} asChild>
-            <Link href={'/auth/sign-in'}>Forgot Password</Link>
+            <Link href={AUTH_ROUTES.SIGN_IN}>Forgot Password</Link>
           </Button>
 
           <Button variant={'primary'} className={classnames.signIn} type={'submit'}>
@@ -70,7 +71,7 @@ export function SignIn() {
         <span className={classnames.question}>{`Don't have an account?`}</span>
 
         <Button variant={'text'} className={classnames.signUp} asChild>
-          <Link href={'/auth/sign-up'}>Sign Up</Link>
+          <Link href={AUTH_ROUTES.SIGN_UP}>Sign Up</Link>
         </Button>
       </Card>
     </div>
