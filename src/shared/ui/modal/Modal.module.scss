@@ -17,11 +17,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  /* margin-left: 15px and margin-right: 15px for fixed element */
-  width: calc(100% - 30px);
-
   overflow: auto;
 
+  /* margin-left: 15px and margin-right: 15px for fixed element */
+  width: calc(100% - 30px);
   border-radius: var(--border-radius-s);
 
   background-color: var(--color-dark-300);

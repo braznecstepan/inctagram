@@ -41,7 +41,11 @@ export const Dialog: FC<DialogProps> = ({
   }
 
   const handleCancelButtonClick = () => {
-    onCancelButtonClick ? onCancelButtonClick() : onClose?.()
+    if (onCancelButtonClick) {
+      onCancelButtonClick()
+    } else {
+      onClose?.()
+    }
   }
 
   const classnames = {
@@ -54,12 +58,10 @@ export const Dialog: FC<DialogProps> = ({
     button: s.button,
   }
 
-  const confirmButtonVariant: ButtonVariant = showCancelButton
-    ? invertButtons
-      ? 'outlined'
-      : 'primary'
-    : 'primary'
-
+  const confirmButtonVariant: ButtonVariant = getConfirmButtonVariant(
+    invertButtons,
+    showCancelButton
+  )
   const cancelButtonVariant: ButtonVariant = invertButtons ? 'primary' : 'outlined'
 
   return (
@@ -89,4 +91,17 @@ export const Dialog: FC<DialogProps> = ({
       </div>
     </Modal>
   )
+}
+
+const getConfirmButtonVariant = (
+  invertButtons: boolean,
+  showCancelButton: boolean
+): ButtonVariant => {
+  if (showCancelButton) {
+    if (invertButtons) {
+      return 'outlined'
+    }
+  }
+
+  return 'primary'
 }
