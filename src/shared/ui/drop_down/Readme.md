@@ -17,7 +17,6 @@ onValueChange={(value) => console.log('Selected:', value)}
   label="Select Fruit"
   options={options}
   error="Please select a fruit"
-  fullWidth
 />
 
 // Controlled
