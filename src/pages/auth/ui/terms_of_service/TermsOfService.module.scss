@@ -1,0 +1,29 @@
+@use '../../../../shared/ui/styles/typography' as t;
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.terms_title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.terms_text {
+  text-align: center;
+
+  @include t.uik-regular-text-14;
+}
+
+.back_link {
+  a {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 15px;
+    }
+  }
+}
