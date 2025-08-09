@@ -3,7 +3,6 @@ import React from 'react'
 import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
 import StoreProvider from '@/app/storeProvider'
-import Link from 'next/link'
 import { Header } from '@/widgets'
 
 export const metadata: Metadata = {
