@@ -60,7 +60,7 @@ export function SignIn() {
           />
 
           <Button variant={'text'} className={classnames.forgotPassword} asChild>
-            <Link href={AUTH_ROUTES.SIGN_IN}>Forgot Password</Link>
+            <Link href={AUTH_ROUTES.RECOVERY}>Forgot Password</Link>
           </Button>
 
           <Button variant={'primary'} className={classnames.signIn} type={'submit'}>

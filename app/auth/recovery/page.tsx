@@ -1,4 +1,2 @@
 'use client'
-export default function page() {
-  return <div>Recovery</div>
-}
+export { RecoveryPassword as default } from '@/pages/auth'
