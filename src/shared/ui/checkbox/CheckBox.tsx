@@ -1,9 +1,8 @@
-'use client'
 import { FC, ReactNode } from 'react'
 
 import * as CheckboxRadix from '@radix-ui/react-checkbox'
 import * as LabelRadix from '@radix-ui/react-label'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import s from './CheckBox.module.scss'
 import CheckBoxSelected from '@/shared/ui/checkbox/CheckBoxSelected'

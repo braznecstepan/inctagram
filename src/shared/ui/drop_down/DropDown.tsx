@@ -1,6 +1,6 @@
 import React from 'react'
 
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 import * as Select from '@radix-ui/react-select'
 
 import { ChevronDownIcon } from '../icons/ChevronDownIcon'
@@ -63,9 +63,9 @@ export const DropDown: React.FC<DropDownProps> = ({
         <Select.Portal>
           <Select.Content
             className={s.content}
-            position="popper"
-            side="bottom"
-            align="start"
+            position={'popper'}
+            side={'bottom'}
+            align={'start'}
             sideOffset={4}
           >
             <Select.ScrollUpButton className={s.scrollButton}>

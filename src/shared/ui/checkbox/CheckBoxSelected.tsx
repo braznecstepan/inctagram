@@ -39,7 +39,6 @@ const CheckBoxSelected = (allProps: IconProps) => {
 export default CheckBoxSelected
 
 export const IconWrapper: FC<{ icon: ReactNode } & IconProps> = ({
-  autoSize,
   backgroundColor = 'var(--color-neutral-light-50)',
   color: colorProp,
   icon,
