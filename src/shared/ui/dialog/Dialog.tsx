@@ -58,7 +58,7 @@ export const Dialog: FC<DialogProps> = ({
   const cancelButtonVariant: ButtonVariant = invertButtons ? 'primary' : 'outlined'
 
   return (
-    <Modal {...rest}>
+    <Modal onClose={handleCancelButtonClick} {...rest}>
       {children}
       <div className={classnames.buttonsBox}>
         {
