@@ -1,3 +1,92 @@
-.testClass {
-  width: auto;
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var( --color-light-100);
+
+  &.tight {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  &.disabled {
+    cursor: default;
+    color: var(--color-light-900);
+  }
+}
+
+.root {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-light-500);
+  border-radius: 2px;
+
+  background-color: transparent;
+
+  &:focus {
+    box-shadow: 0 0 1px 7px var(--color-dark-300);
+  }
+
+  &:disabled {
+    cursor: initial;
+    border-color: var(--color-light-900);
+  }
+
+  &[data-state='checked']:disabled {
+    background-color: var(--color-checkbox-disabled);
+  }
+}
+
+.buttonWrapper {
+  cursor: pointer;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  background-color: rgb(255 255 255 / 0%);
+
+  &.tight {
+    margin: -6px;
+  }
+
+  &.disabled {
+    cursor: initial;
+  }
+
+  &:focus-within,
+  &:hover:not(.disabled),
+  &:hover:not(.disabled) .root:not([data-state='checked']) {
+    background-color: var(--color-bg-focus);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--color-bg-primary-active);
+  }
+}
+
+.indicator {
+  width: 24px;
+  height: 24px;
 }
