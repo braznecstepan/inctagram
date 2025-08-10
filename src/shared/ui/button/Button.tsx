@@ -25,6 +25,7 @@ export const Button = ({
   return (
     <Component
       onClick={onClick}
+      disabled={disabled}
       className={clsx(
         s.button,
         s[variant],
