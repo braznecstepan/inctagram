@@ -23,24 +23,26 @@ export const Modal = ({
   className,
   open = false,
   ...rest
-}: ModalProps) => (
-  <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
-    <Dialog.Portal>
-      <Dialog.Overlay className={s.Overlay} />
-      <Dialog.Content className={clsx(s.Content, s[size], className)}>
-        <div className={s.Header}>
-          <Dialog.Title className={s.Title}>{title}</Dialog.Title>
-          <Dialog.Close asChild>
-            {showCloseButton && (
-              <Dialog.Close className={s.IconButton} aria-label={'Close'}>
-                <Close />
-              </Dialog.Close>
-            )}
-          </Dialog.Close>
-        </div>
-        <hr className={s.Separator} />
-        <div className={s.ContentBox}>{children}</div>
-      </Dialog.Content>
-    </Dialog.Portal>
-  </Dialog.Root>
-)
+}: ModalProps) => {
+  function handleModalClosed() {
+    onClose?.()
+  }
+
+  return (
+    <Dialog.Root open={open} onOpenChange={handleModalClosed} {...rest}>
+      <Dialog.Portal>
+        <Dialog.Overlay className={s.Overlay} />
+        <Dialog.Content className={clsx(s.Content, s[size], className)}>
+          <div className={s.Header}>
+            <Dialog.Title className={s.Title}>{title}</Dialog.Title>
+            <Dialog.Close className={s.IconButton} asChild>
+              {showCloseButton && <Close />}
+            </Dialog.Close>
+          </div>
+          <hr className={s.Separator} />
+          <div className={s.ContentBox}>{children}</div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
+  )
+}
