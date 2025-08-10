@@ -24,12 +24,8 @@ export const Modal = ({
   open = false,
   ...rest
 }: ModalProps) => {
-  function handleModalClosed() {
-    onClose?.()
-  }
-
   return (
-    <Dialog.Root open={open} onOpenChange={handleModalClosed} {...rest}>
+    <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.Overlay} />
         <Dialog.Content className={clsx(s.Content, s[size], className)}>
