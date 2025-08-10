@@ -23,7 +23,6 @@ export const RecoveryPassword = () => {
         <h1 className={s.title}>Forgot Password</h1>
         <form onSubmit={handleFormSubmit}>
           <TextField
-            errorMessage={"User with this email doesn't exist"}
             onChange={event => setValue(event.currentTarget.value)}
             value={value}
             label={'Email'}
