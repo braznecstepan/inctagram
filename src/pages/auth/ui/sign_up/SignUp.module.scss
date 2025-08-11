@@ -51,10 +51,14 @@
   margin-top: 24px;
 }
 
+.isAgree {
+  margin-top: 12px;
+}
+
 .compliance {
   @include t.uik-small-text;
 
-  margin: 22px auto 0;
+  margin: 0 auto;
 }
 
 .termsOfService,
@@ -66,7 +70,7 @@
 }
 
 .signUp {
-  margin-top: 22px;
+  margin-top: 12px;
 }
 
 .question {
