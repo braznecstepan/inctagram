@@ -17,8 +17,8 @@ export function ConfirmedEmail() {
 
   return (
     <div className={classnames.box}>
-      <div className={classnames.title}>Congratulations!</div>
-      <div className={classnames.message}>You email has been confirmed</div>
+      <h1 className={classnames.title}>Congratulations!</h1>
+      <p className={classnames.message}>You email has been confirmed</p>
       <div className={classnames.buttonImageBox}>
         <Button className={classnames.signIn} asChild>
           <Link href={AUTH_ROUTES.SIGN_IN}>Sign In</Link>

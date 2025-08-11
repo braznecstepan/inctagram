@@ -3,17 +3,16 @@ import { Button, Card, TextField } from '@/shared/ui'
 
 import s from './SignUp.module.scss'
 import Link from 'next/link'
-import { usePasswordMode } from '@/pages/auth/lib'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
+import { useToggleMode } from '@/shared/lib/hooks'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Checkbox } from '@/shared/ui/checkbox/CheckBox'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpSchema, signUpType } from '@/pages/auth/model/validation'
 
 export function SignUp() {
-  const { mode: passwordMode, toggleMode: togglePasswordMode } = usePasswordMode()
-  const { mode: passwordConfirmationMode, toggleMode: togglePasswordConfirmationMode } =
-    usePasswordMode()
+  const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
+  const { mode: showConfirmedPassword, toggleMode: toggleShowConfirmedPassword } = useToggleMode()
 
   const {
     register,
@@ -59,7 +58,7 @@ export function SignUp() {
   return (
     <div className={classnames.box}>
       <Card className={classnames.card}>
-        <span className={classnames.title}>Sign Up</span>
+        <h1 className={classnames.title}>Sign Up</h1>
 
         <div className={classnames.icons}>
           <Link href={AUTH_ROUTES.SIGN_UP}>
@@ -87,30 +86,34 @@ export function SignUp() {
             placeholder={'it-incubator@gmail.com'}
             label={'Email'}
             required={true}
+            type={'email'}
+            autoComplete={'email'}
           />
 
           <TextField
             className={classnames.password}
             errorMessage={errors.password && errors.password.message}
-            type={passwordMode ? 'password' : 'text'}
             {...register('password')}
+            type={showPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password'}
-            iconEnd={passwordMode ? <EyeOffOutline /> : <EyeOutline />}
-            onEndIconClick={togglePasswordMode}
+            iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            onEndIconClick={toggleShowPassword}
+            autoComplete={'new-password'}
             required={true}
           />
 
           <TextField
             className={classnames.passwordConfirmation}
             errorMessage={errors.passwordConfirmation && errors.passwordConfirmation.message}
-            type={passwordConfirmationMode ? 'password' : 'text'}
             {...register('passwordConfirmation')}
+            type={showConfirmedPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            iconEnd={passwordConfirmationMode ? <EyeOffOutline /> : <EyeOutline />}
-            onEndIconClick={togglePasswordConfirmationMode}
             required={true}
+            iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
+            onEndIconClick={toggleShowConfirmedPassword}
+            autoComplete={'new-password'}
           />
 
           <Controller
@@ -123,7 +126,7 @@ export function SignUp() {
                   required={true}
                   checked={field.value}
                   label={
-                    <span className={classnames.compliance}>
+                    <p className={classnames.compliance}>
                       I agree to the{' '}
                       <Button variant={'text'} className={classnames.termsOfServices} asChild>
                         <Link href={AUTH_ROUTES.TERMS_OF_SERVICE}>Terms of Service</Link>
@@ -132,7 +135,7 @@ export function SignUp() {
                       <Button variant={'text'} className={classnames.privacyPolicy} asChild>
                         <Link href={AUTH_ROUTES.PRIVACY_POLICY}>Privacy Policy</Link>
                       </Button>
-                    </span>
+                    </p>
                   }
                 />
               </div>
@@ -144,7 +147,7 @@ export function SignUp() {
           </Button>
         </form>
 
-        <span className={classnames.question}>{`Do you have an account?`}</span>
+        <p className={classnames.question}>{`Do you have an account?`}</p>
 
         <Button variant={'text'} className={classnames.signIn} asChild>
           <Link href={AUTH_ROUTES.SIGN_IN}>Sign In</Link>

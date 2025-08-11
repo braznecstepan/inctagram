@@ -27,6 +27,8 @@ export const RecoveryPassword = () => {
             value={value}
             label={'Email'}
             placeholder={'Epam@epam.com'}
+            type={'email'}
+            autoComplete={'email'}
           />
           <Dialog
             size={'sm'}

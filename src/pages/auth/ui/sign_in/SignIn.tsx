@@ -3,14 +3,14 @@ import { Button, Card, TextField } from '@/shared/ui'
 
 import s from './SignIn.module.scss'
 import Link from 'next/link'
-import { usePasswordMode } from '@/pages/auth/lib'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema, signInType } from '@/pages/auth/model/validation'
+import { useToggleMode } from '@/shared/lib/hooks'
 
 export function SignIn() {
-  const { mode, toggleMode } = usePasswordMode()
+  const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
 
   const {
     register,
@@ -46,7 +46,7 @@ export function SignIn() {
   return (
     <div className={classnames.box}>
       <Card className={classnames.card}>
-        <span className={classnames.title}>Sign In</span>
+        <h1 className={classnames.title}>Sign In</h1>
 
         <div className={classnames.icons}>
           <Link href={AUTH_ROUTES.SIGN_IN}>
@@ -64,17 +64,20 @@ export function SignIn() {
             errorMessage={errors.email && errors.email.message}
             placeholder={'it-incubator@gmail.com'}
             label={'Email'}
+            type={'email'}
+            autoComplete={'email'}
           />
 
           <TextField
             className={classnames.password}
-            type={mode ? 'password' : 'text'}
             {...register('password')}
             errorMessage={errors.password && errors.password.message}
+            type={showPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password'}
-            iconEnd={mode ? <EyeOffOutline /> : <EyeOutline />}
-            onEndIconClick={toggleMode}
+            iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            onEndIconClick={toggleShowPassword}
+            autoComplete={'current-password'}
           />
 
           <Button variant={'text'} className={classnames.forgotPassword} asChild>
@@ -86,7 +89,7 @@ export function SignIn() {
           </Button>
         </form>
 
-        <span className={classnames.question}>{`Don't have an account?`}</span>
+        <p className={classnames.question}>{`Don't have an account?`}</p>
 
         <Button variant={'text'} className={classnames.signUp} asChild>
           <Link href={AUTH_ROUTES.SIGN_UP}>Sign Up</Link>

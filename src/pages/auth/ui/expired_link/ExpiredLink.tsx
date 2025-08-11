@@ -21,13 +21,18 @@ export function ExpiredLink() {
 
   return (
     <div className={classnames.box}>
-      <div className={classnames.title}>Email verification link expired</div>
-      <div className={classnames.message}>
+      <h1 className={classnames.title}>Email verification link expired</h1>
+      <p className={classnames.message}>
         Looks like the verification link has expired. Not to worry, we can send the link again
-      </div>
+      </p>
       <div className={classnames.formImageBox}>
         <form className={classnames.form} onSubmit={handleFormSubmit}>
-          <TextField placeholder={'it-incubator@gmail.com'} label={'Email'} />
+          <TextField
+            placeholder={'it-incubator@gmail.com'}
+            label={'Email'}
+            type={'email'}
+            autoComplete={'email'}
+          />
           <Button className={classnames.resendButton} fullWidth type={'submit'}>
             Resend verification link
           </Button>
