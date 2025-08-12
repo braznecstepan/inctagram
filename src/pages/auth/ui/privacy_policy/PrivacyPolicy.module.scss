@@ -1,0 +1,49 @@
+@use '@/shared/ui/styles/typography' as t;
+
+.privacy_policy {
+  margin-top: 85px;
+  margin-bottom: 60px;
+
+  > div:first-child {
+    padding: 0 60px;
+  }
+}
+
+.back_link__inner {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 35px;
+
+  transition: all 0.2s linear;
+
+  span {
+    margin-left: 17px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.privacy_policy__content {
+  max-width: 950px;
+  margin: 0 auto;
+
+  h1,
+  p {
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 35px;
+
+    @include t.uik-h1-typography;
+  }
+
+  p {
+    @include t.uik-regular-text-14;
+  }
+}
