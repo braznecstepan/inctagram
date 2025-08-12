@@ -1,4 +1,2 @@
 'use client'
-export default function page() {
-  return <div>Privacy Policy</div>
-}
+export { PrivacyPolicy as default } from '@/pages/auth'

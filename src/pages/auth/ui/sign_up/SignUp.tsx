@@ -76,7 +76,7 @@ export function SignUp() {
             label={'Username'}
             errorMessage={errors.name && errors.name.message}
             {...register('name')}
-            required={true}
+            required
           />
 
           <TextField
@@ -85,7 +85,7 @@ export function SignUp() {
             {...register('email')}
             placeholder={'it-incubator@gmail.com'}
             label={'Email'}
-            required={true}
+            required
             type={'email'}
             autoComplete={'email'}
           />
@@ -100,7 +100,7 @@ export function SignUp() {
             iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowPassword}
             autoComplete={'new-password'}
-            required={true}
+            required
           />
 
           <TextField
@@ -110,7 +110,7 @@ export function SignUp() {
             type={showConfirmedPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            required={true}
+            required
             iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowConfirmedPassword}
             autoComplete={'new-password'}
@@ -118,12 +118,12 @@ export function SignUp() {
 
           <Controller
             control={control}
-            name="isAgree"
+            name={'isAgree'}
             render={({ field }) => (
               <div className={classnames.isAgree}>
                 <Checkbox
                   onChange={e => field.onChange(e)}
-                  required={true}
+                  required
                   checked={field.value}
                   label={
                     <p className={classnames.compliance}>
