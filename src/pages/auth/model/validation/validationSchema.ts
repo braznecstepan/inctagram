@@ -12,14 +12,15 @@ const emailSchema = z.string().regex(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{
 const passwordSchema = z
   .string()
   .min(6, { message: 'Minimum number of characters 6' })
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,}$/, {
+  .max(20, { message: 'Maximum number of characters 20' })
+  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,20}$/, {
     message:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
   })
 
 const passwordConfirmSchema = z
   .string()
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,}$/, {
+  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,20}$/, {
     message:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
   })
@@ -37,5 +38,11 @@ export const signInSchema = z.object({
   password: passwordSchema,
 })
 
+export const newPasswordShema = z.object({
+  password: passwordSchema,
+  passwordConfirmation: passwordConfirmSchema,
+})
+
 export type signInType = z.infer<typeof signInSchema>
 export type signUpType = z.infer<typeof signUpSchema>
+export type newPasswordType = z.infer<typeof newPasswordShema>

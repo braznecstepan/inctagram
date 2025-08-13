@@ -22,6 +22,7 @@ export const CreatePassword = () => {
     password: s.password,
     text: s.text,
   }
+
   return (
     <div className={classnames.box}>
       <Card className={classnames.card}>
@@ -34,6 +35,7 @@ export const CreatePassword = () => {
             label={'New password'}
             iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowPassword}
+            required={true}
           />
 
           <TextField
@@ -43,6 +45,7 @@ export const CreatePassword = () => {
             label={'Password confirmation'}
             iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowConfirmedPassword}
+            required={true}
           />
           <span className={classnames.text}>
             {`Your password must be between 6 and 20 characters`}
