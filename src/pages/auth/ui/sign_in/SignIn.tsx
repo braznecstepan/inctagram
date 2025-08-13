@@ -8,10 +8,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema, signInType } from '@/pages/auth/model/validation'
 import { useToggleMode } from '@/shared/lib/hooks'
+import { useLoginMutation } from '@/entities/auth/api/authApi'
 
 export function SignIn() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
-
+  const [loginFunc] = useLoginMutation()
   const {
     register,
     handleSubmit,
@@ -26,6 +27,9 @@ export function SignIn() {
   })
 
   const handleFormSubmit: SubmitHandler<signInType> = data => {
+    loginFunc(data).then(res => {
+
+    })
     reset()
   }
 
