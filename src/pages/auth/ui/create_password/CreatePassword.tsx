@@ -4,12 +4,12 @@ import { Button, Card, TextField } from '@/shared/ui'
 import { EyeOffOutline, EyeOutline } from '@/shared/ui/icons'
 import { FormEvent } from 'react'
 
-export function CreatePassword() {
+export const CreatePassword = () => {
   const { mode, toggleMode } = usePasswordMode()
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert('Paswword is created')
+    alert('New paswword is created')
   }
 
   const classnames = {
@@ -19,6 +19,7 @@ export function CreatePassword() {
     icons: s.icons,
     form: s.form,
     password: s.password,
+    text: s.text,
   }
   return (
     <div className={classnames.box}>
@@ -42,8 +43,8 @@ export function CreatePassword() {
             iconEnd={mode ? <EyeOffOutline /> : <EyeOutline />}
             onEndIconClick={toggleMode}
           />
-          <span className={classnames.password}>
-            {`Yoour password must be between 6 and 20 characters`}
+          <span className={classnames.text}>
+            {`Your password must be between 6 and 20 characters`}
           </span>
 
           <Button variant={'primary'} className={classnames.password} type={'submit'}>
