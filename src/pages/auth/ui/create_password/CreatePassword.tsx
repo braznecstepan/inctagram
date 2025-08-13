@@ -1,11 +1,27 @@
-import { usePasswordMode } from '../../lib'
+import { useToggleMode } from '@/shared/lib/hooks'
 import s from './CreatePassword.module.scss'
 import { Button, Card, TextField } from '@/shared/ui'
 import { EyeOffOutline, EyeOutline } from '@/shared/ui/icons'
 import { FormEvent } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { newPasswordShema, newPasswordType } from '../../model/validation'
+import { useForm } from 'react-hook-form'
 
 export const CreatePassword = () => {
-  const { mode, toggleMode } = usePasswordMode()
+  const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
+  const { mode: showPasswordConfirmation, toggleMode: togglePasswordConfirmation } = useToggleMode()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<newPasswordType>({
+    defaultValues: {
+      password: '',
+      passwordConfirmation: '',
+    },
+    resolver: zodResolver(newPasswordShema),
+  })
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,6 +37,7 @@ export const CreatePassword = () => {
     password: s.password,
     text: s.text,
   }
+
   return (
     <div className={classnames.box}>
       <Card className={classnames.card}>
@@ -28,20 +45,26 @@ export const CreatePassword = () => {
         <form className={classnames.form} onSubmit={handleFormSubmit}>
           <TextField
             className={classnames.password}
-            type={mode ? 'password' : 'text'}
+            errorMessage={errors.password && errors.password.message}
+            {...register('password')}
+            type={showPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'New password'}
-            iconEnd={mode ? <EyeOffOutline /> : <EyeOutline />}
-            onEndIconClick={toggleMode}
+            iconEnd={showPassword ? <EyeOffOutline /> : <EyeOutline />}
+            onEndIconClick={toggleShowPassword}
+            required={true}
           />
 
           <TextField
             className={classnames.password}
-            type={mode ? 'password' : 'text'}
+            errorMessage={errors.passwordConfirmation && errors.passwordConfirmation.message}
+            {...register('passwordConfirmation')}
+            type={showPasswordConfirmation ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            iconEnd={mode ? <EyeOffOutline /> : <EyeOutline />}
-            onEndIconClick={toggleMode}
+            required={true}
+            iconEnd={showPasswordConfirmation ? <EyeOffOutline /> : <EyeOutline />}
+            onEndIconClick={togglePasswordConfirmation}
           />
           <span className={classnames.text}>
             {`Your password must be between 6 and 20 characters`}
