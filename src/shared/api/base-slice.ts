@@ -22,3 +22,4 @@ export const baseSlice = createSlice({
 
 export const { selectIsLoggedIn, selectNotificationStatus } = baseSlice.selectors
 export const baseReducer = baseSlice.reducer
+export const { meAC, changeNewMessage } = baseSlice.actions
