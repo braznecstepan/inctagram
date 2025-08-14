@@ -1,4 +1,2 @@
 'use client'
-export default function page() {
-  return <div>Create Password</div>
-}
+export { CreatePassword as default } from '@/pages/auth'
