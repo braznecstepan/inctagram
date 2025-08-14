@@ -31,7 +31,7 @@ export function SignUp() {
     resolver: zodResolver(signUpSchema),
   })
 
-  const handleFormSubmit: SubmitHandler<signUpType> = data => {
+  const handleFormSubmit: SubmitHandler<signUpType> = () => {
     // console.log(data)
     reset()
   }

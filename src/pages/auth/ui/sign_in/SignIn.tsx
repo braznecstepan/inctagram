@@ -25,7 +25,7 @@ export function SignIn() {
     resolver: zodResolver(signInSchema),
   })
 
-  const handleFormSubmit: SubmitHandler<signInType> = data => {
+  const handleFormSubmit: SubmitHandler<signInType> = () => {
     reset()
   }
 
