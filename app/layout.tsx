@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next'
 import React from 'react'
 import '@/shared/ui/styles/root_variables/index.css'

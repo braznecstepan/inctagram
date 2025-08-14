@@ -8,6 +8,14 @@ export type RequestType = {
 export type ResponseType = {
   accessToken: string
 }
+export type ErrorType = {
+  statusCode: number
+  messages: {
+    message: string
+    field: string
+  }[]
+  error: string
+}
 
 export type ResponseMeType = {
   userId: string

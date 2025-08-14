@@ -1,6 +1,6 @@
+'use client'
 import { EyeOffOutline, EyeOutline, GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/shared/ui/icons'
 import { Button, Card, TextField } from '@/shared/ui'
-
 import s from './SignIn.module.scss'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
@@ -9,11 +9,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema, signInType } from '@/pages/auth/model/validation'
 import { useToggleMode } from '@/shared/lib/hooks'
 import { useLoginMutation } from '@/entities/auth/api/authApi'
+import { useAppDispatch } from '@/app/store'
+import { useGetProfileQuery, useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
+import { useRouter } from 'next/navigation'
 
 export function SignIn() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
   const [loginFunc] = useLoginMutation()
+  const [getProfile, profile] = useLazyGetProfileQuery()
+  const router = useRouter()
+  const dispatch = useAppDispatch()
   const {
+    watch,
     register,
     handleSubmit,
     reset,
@@ -24,13 +31,21 @@ export function SignIn() {
       password: '',
     },
     resolver: zodResolver(signInSchema),
+    mode: 'onBlur',
   })
+  const handleFormSubmit: SubmitHandler<signInType> = async data => {
+    console.log(data)
+    try {
+      const res = await loginFunc(data).unwrap()
+      if (res.accessToken) {
+        localStorage.setItem('token', res.accessToken)
+        const data = await getProfile().unwrap()
+        console.log(data)
+        router.push(`/profile`)
+      }
+    } catch (error) {
 
-  const handleFormSubmit: SubmitHandler<signInType> = data => {
-    loginFunc(data).then(res => {
-
-    })
-    reset()
+    }
   }
 
   const classnames = {

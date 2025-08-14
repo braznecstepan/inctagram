@@ -1,17 +1,14 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import process from 'process'
 import { redirect } from 'next/navigation'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_BASEURL,
+  baseUrl: 'https://inctagram.work',
   prepareHeaders: headers => {
     const token = localStorage.getItem('token')
-
     headers.set('Authorization', `Bearer ${token}`)
-
     return headers
   },
 })
@@ -24,7 +21,6 @@ export const baseQueryWithReauth: BaseQueryFn<
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
-
   if (result.error && result.error.status === 401) {
     // checking whether the mutex is locked
     if (!mutex.isLocked()) {
@@ -33,9 +29,8 @@ export const baseQueryWithReauth: BaseQueryFn<
       try {
         const refreshResult = (await baseQuery(
           {
-            url: '/v1/auth/update-tokens',
+            url: '/api/v1/auth/update-tokens',
             method: 'POST',
-            credentials: 'include',
           },
           api,
           extraOptions
@@ -47,7 +42,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          redirect('auth/login')
+          redirect('auth/sign-up')
         }
       } finally {
         release()
