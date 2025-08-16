@@ -2,13 +2,14 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
-
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://inctagram.work',
   prepareHeaders: headers => {
     const token = localStorage.getItem('token')
+
     headers.set('Authorization', `Bearer ${token}`)
+
     return headers
   },
 })
@@ -21,6 +22,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock() // Проверка заблокирован ли Mutex другим потоком
   let result = await baseQuery(args, api, extraOptions)
+
   if (result.error && result.error.status === 401) {
     // checking whether the mutex is locked
     if (!mutex.isLocked()) {

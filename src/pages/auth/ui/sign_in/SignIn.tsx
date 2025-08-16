@@ -7,9 +7,8 @@ import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema, signInType } from '@/pages/auth/model/validation'
-import { useToggleMode } from '@/shared/lib/hooks'
+import { useAppDispatch, useToggleMode } from '@/shared/lib/hooks'
 import { useLoginMutation } from '@/entities/auth/api/authApi'
-import { useAppDispatch } from '@/app/store'
 import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
 import { changeError } from '@/shared/api/base-slice'
@@ -37,11 +36,12 @@ export function SignIn() {
   const handleFormSubmit: SubmitHandler<signInType> = async data => {
     try {
       const res = await loginFunc(data).unwrap()
+
       if (res.accessToken) {
         localStorage.setItem('token', res.accessToken)
         const data = await getProfile().unwrap()
-        console.log(data)
-        if (!!data.firstName) {
+
+        if (data.firstName) {
           router.push(`/profile/${data.id}`)
         }
         router.push('/profile_settings')
