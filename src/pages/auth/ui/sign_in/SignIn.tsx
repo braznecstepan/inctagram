@@ -10,17 +10,17 @@ import { signInSchema, signInType } from '@/pages/auth/model/validation'
 import { useToggleMode } from '@/shared/lib/hooks'
 import { useLoginMutation } from '@/entities/auth/api/authApi'
 import { useAppDispatch } from '@/app/store'
-import { useGetProfileQuery, useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
+import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
+import { changeError } from '@/shared/api/base-slice'
 
 export function SignIn() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
   const [loginFunc] = useLoginMutation()
-  const [getProfile, profile] = useLazyGetProfileQuery()
+  const [getProfile] = useLazyGetProfileQuery()
   const router = useRouter()
   const dispatch = useAppDispatch()
   const {
-    watch,
     register,
     handleSubmit,
     reset,
@@ -33,18 +33,22 @@ export function SignIn() {
     resolver: zodResolver(signInSchema),
     mode: 'onBlur',
   })
+
   const handleFormSubmit: SubmitHandler<signInType> = async data => {
-    console.log(data)
     try {
       const res = await loginFunc(data).unwrap()
       if (res.accessToken) {
         localStorage.setItem('token', res.accessToken)
         const data = await getProfile().unwrap()
         console.log(data)
-        router.push(`/profile`)
+        if (!!data.firstName) {
+          router.push(`/profile/${data.id}`)
+        }
+        router.push('/profile_settings')
       }
-    } catch (error) {
-
+      reset()
+    } catch (error: unknown) {
+      dispatch(changeError({ error: 'The email must match the format example@example.com' }))
     }
   }
 

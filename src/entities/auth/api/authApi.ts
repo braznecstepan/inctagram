@@ -1,39 +1,18 @@
 import { baseApi } from '@/shared/api'
+import {LoginRequest, LoginResponse, MeResponse} from '@/entities/auth/types/authApi.types';
 
-export type RequestType = {
-  email: string
-  password: string
-}
 
-export type ResponseType = {
-  accessToken: string
-}
-export type ErrorType = {
-  statusCode: number
-  messages: {
-    message: string
-    field: string
-  }[]
-  error: string
-}
-
-export type ResponseMeType = {
-  userId: string
-  userName: string
-  email: string
-  isBlocked: boolean
-}
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    login: builder.mutation<ResponseType, RequestType>({
+    login: builder.mutation<LoginResponse, LoginRequest>({
       query: obj => ({
         url: '/api/v1/auth/login',
         method: 'POST',
         body: obj,
       }),
     }),
-    me: builder.query<ResponseMeType, void>({
+    me: builder.query<MeResponse, void>({
       query: () => ({
         url: '/api/v1/auth/me',
         method: 'GET',
@@ -42,4 +21,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useMeQuery, useLoginMutation } = authApi
+export const { useMeQuery, useLoginMutation,useLazyMeQuery } = authApi
