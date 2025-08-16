@@ -5,6 +5,7 @@ export const baseSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     notificationStatus: false,
+    error: null as string | null,
   },
   reducers: create => ({
     meAC: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
@@ -13,13 +14,17 @@ export const baseSlice = createSlice({
     changeNewMessage: create.reducer<{ notificationStatus: boolean }>((state, action) => {
       state.notificationStatus = action.payload.notificationStatus
     }),
+    changeError: create.reducer<{ error: string }>((state, action) => {
+      state.error = action.payload.error
+    }),
   }),
   selectors: {
     selectIsLoggedIn: state => state.isLoggedIn,
     selectNotificationStatus: state => state.notificationStatus,
+    selectError: state => state.error,
   },
 })
 
-export const { selectIsLoggedIn, selectNotificationStatus } = baseSlice.selectors
+export const { selectIsLoggedIn, selectNotificationStatus, selectError } = baseSlice.selectors
 export const baseReducer = baseSlice.reducer
-export const { meAC, changeNewMessage } = baseSlice.actions
+export const { meAC, changeNewMessage,changeError } = baseSlice.actions

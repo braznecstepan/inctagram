@@ -1,10 +1,10 @@
-
 import type { Metadata } from 'next'
 import React from 'react'
 import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
 import StoreProvider from '@/app/storeProvider'
 import { Header } from '@/widgets'
+import { PopUp } from '@/shared/ui/popUp/PopUp'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -43,6 +43,7 @@ export default function RootLayout({
           {/*  ))}*/}
           {/*</header>*/}
           {children}
+          <PopUp />
         </StoreProvider>
       </body>
     </html>

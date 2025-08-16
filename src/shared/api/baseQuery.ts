@@ -1,7 +1,7 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import { redirect } from 'next/navigation'
+
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
@@ -16,10 +16,10 @@ const baseQuery = fetchBaseQuery({
 export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
-  FetchBaseQueryError
+  FetchBaseQueryError | { status: 'REFRESH_TOKEN_FAILED' }
 > = async (args, api, extraOptions) => {
   // wait until the mutex is available without locking it
-  await mutex.waitForUnlock()
+  await mutex.waitForUnlock() // Проверка заблокирован ли Mutex другим потоком
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
     // checking whether the mutex is locked
@@ -42,7 +42,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          redirect('auth/sign-up')
+          return { error: { status: 'REFRESH_TOKEN_FAILED' } }
         }
       } finally {
         release()
