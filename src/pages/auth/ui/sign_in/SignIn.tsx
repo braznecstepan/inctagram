@@ -37,11 +37,13 @@ export function SignIn() {
   const handleFormSubmit: SubmitHandler<signInType> = async data => {
     try {
       const res = await loginFunc(data).unwrap()
+
       if (res.accessToken) {
         localStorage.setItem('token', res.accessToken)
         const data = await getProfile().unwrap()
+
         console.log(data)
-        if (!!data.firstName) {
+        if (data.firstName) {
           router.push(`/profile/${data.id}`)
         }
         router.push('/profile_settings')

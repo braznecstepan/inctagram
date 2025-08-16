@@ -11,17 +11,20 @@ export const PopUp = () => {
   const [isOpen, setIsOpen] = useState(false)
   const error = useAppSelector(selectError)
   const dispatch = useAppDispatch()
+
   useEffect(() => {
-    if (!!error) {
+    if (error) {
       setIsOpen(true)
     }
     const id = setTimeout(() => {
       dispatch(changeError({ error: '' }))
     }, 2000)
+
     return () => clearTimeout(id)
   }, [error])
+
   return (
-    <Toast.Provider duration={2000} swipeDirection="right">
+    <Toast.Provider duration={2000} swipeDirection={'right'}>
       <Toast.Root className={styles.Root} open={isOpen} onOpenChange={setIsOpen}>
         <Toast.Description>{error}</Toast.Description>
         <Toast.Close className={styles.Action} asChild>

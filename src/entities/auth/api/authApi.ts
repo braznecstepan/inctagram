@@ -1,7 +1,5 @@
 import { baseApi } from '@/shared/api'
-import {LoginRequest, LoginResponse, MeResponse} from '@/entities/auth/types/authApi.types';
-
-
+import { LoginRequest, LoginResponse, MeResponse } from '@/entities/auth/types/authApi.types'
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -21,4 +19,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useMeQuery, useLoginMutation,useLazyMeQuery } = authApi
+export const { useMeQuery, useLoginMutation, useLazyMeQuery } = authApi
