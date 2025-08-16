@@ -1,30 +1,9 @@
 import { baseApi } from '@/shared/api'
-
-export type GetProfile = {
-  id: number
-  userName: string
-  firstName: string
-  lastName: string
-  city: string
-  country: string
-  region: string
-  dateOfBirth: string
-  aboutMe: string
-  avatars: [
-    {
-      url: string
-      width: number
-      height: number
-      fileSize: number
-      createdAt: string
-    },
-  ]
-  createdAt: string
-}
+import { GetProfileResponse } from '@/entities/profile/types/profileApi.types'
 
 export const profileApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getProfile: builder.query<GetProfile, void>({
+    getProfile: builder.query<GetProfileResponse, void>({
       query: () => ({
         url: '/api/v1/users/profile',
         method: 'GET',
@@ -33,4 +12,4 @@ export const profileApi = baseApi.injectEndpoints({
   }),
 })
 
-export const {useGetProfileQuery,useLazyGetProfileQuery} = profileApi
+export const { useGetProfileQuery, useLazyGetProfileQuery } = profileApi

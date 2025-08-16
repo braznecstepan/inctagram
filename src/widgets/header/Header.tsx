@@ -2,11 +2,11 @@
 import s from './Header.module.scss'
 import { Button, Container } from '@/shared/ui'
 import OutlineBell from '@/shared/ui/icons/OutlineBell'
-import { useAppSelector } from '@/app/store'
 import { selectIsLoggedIn, selectNotificationStatus } from '@/shared/api/base-slice'
 import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
 import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
 import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/shared/lib/hooks'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
