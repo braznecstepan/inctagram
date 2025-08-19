@@ -43,6 +43,11 @@ export const newPasswordShema = z.object({
   passwordConfirmation: passwordConfirmSchema,
 })
 
+export const recoveryPasswordSchema = z.object({
+  email: emailSchema,
+})
+
 export type signInType = z.infer<typeof signInSchema>
 export type signUpType = z.infer<typeof signUpSchema>
 export type newPasswordType = z.infer<typeof newPasswordShema>
+export type recoveryPasswordType = z.infer<typeof recoveryPasswordSchema>

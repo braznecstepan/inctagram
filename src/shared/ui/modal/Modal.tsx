@@ -28,9 +28,14 @@ export const Modal = ({
     <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.Overlay} />
-        <Dialog.Content className={clsx(s.Content, s[size], className)}>
+        <Dialog.Content
+          aria-describedby={undefined}
+          className={clsx(s.Content, s[size], className)}
+        >
           <div className={s.Header}>
-            <Dialog.Title className={s.Title}>{title}</Dialog.Title>
+            <Dialog.Title aria-label={'Title'} className={s.Title}>
+              {title}
+            </Dialog.Title>
             <Dialog.Close className={s.IconButton} asChild>
               {showCloseButton && <Close />}
             </Dialog.Close>

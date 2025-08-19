@@ -2,29 +2,46 @@ import { Button, Card, Container, Dialog, TextField } from '@/shared/ui'
 import s from './RecoveryPassword.module.scss'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model/validation'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const RecoveryPassword = () => {
-  const [value, setValue] = useState('')
   const [modalOpen, setModalOpen] = useState(false)
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const {
+    watch,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<recoveryPasswordType>({
+    defaultValues: {
+      email: '',
+    },
+    resolver: zodResolver(recoveryPasswordSchema),
+    mode: 'onBlur',
+  })
+  const value = watch().email
+
+  const handleFormSubmit: SubmitHandler<recoveryPasswordType> = data => {
     setModalOpen(true)
+    console.log(data)
   }
 
   const closeHandler = () => {
     setModalOpen(false)
-    setValue('')
+    reset()
   }
 
   return (
     <Container>
       <Card className={s.card}>
         <h1 className={s.title}>Forgot Password</h1>
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
           <TextField
-            onChange={event => setValue(event.currentTarget.value)}
-            value={value}
+            {...register('email')}
+            errorMessage={errors.email && errors.email.message}
             label={'Email'}
             placeholder={'Epam@epam.com'}
             type={'email'}
@@ -37,6 +54,7 @@ export const RecoveryPassword = () => {
             onClose={closeHandler}
             onConfirmButtonClick={closeHandler}
             open={modalOpen}
+            className={s.dialog}
           >
             <p className={s.modalText}>We have sent a link to confirm your email to {value}</p>
           </Dialog>
@@ -44,7 +62,7 @@ export const RecoveryPassword = () => {
             Enter your email address and we will send you further instructions{' '}
           </p>
           <div className={s.buttonBox}>
-            <Button disabled={!value} type={'submit'} fullWidth>
+            <Button disabled={!!errors.email} type={'submit'} fullWidth>
               Send Link
             </Button>
             <Button variant={'text'} fullWidth asChild>
