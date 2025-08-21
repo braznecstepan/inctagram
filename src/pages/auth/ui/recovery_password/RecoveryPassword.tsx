@@ -15,6 +15,7 @@ import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
 export const RecoveryPassword = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+
   console.log(recaptchaToken)
   const [recoveryPassword] = useRecoveryPasswordMutation()
   const dispatch = useAppDispatch()
@@ -36,6 +37,7 @@ export const RecoveryPassword = () => {
   const handleFormSubmit: SubmitHandler<recoveryPasswordType> = async data => {
     if (!recaptchaToken) {
       dispatch(changeError({ error: 'Пожалуйста, подтвердите что вы не робот' }))
+
       return
     }
 
@@ -44,6 +46,7 @@ export const RecoveryPassword = () => {
       recaptcha: recaptchaToken,
       baseUrl: process.env.NEXT_PUBLIC_BASEURL!,
     }
+
     try {
       await recoveryPassword(obj)
       setModalOpen(true)
