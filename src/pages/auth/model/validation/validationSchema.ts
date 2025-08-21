@@ -17,9 +17,9 @@ const passwordSchema = z
   .regex(/[0-9]/, { message: 'Must contain at least one digit (0-9)' })
   .regex(/[A-Z]/, { message: 'Must contain at least one uppercase letter (A-Z)' })
   .regex(/[a-z]/, { message: 'Must contain at least one lowercase letter (a-z)' })
-  .regex(/[!\"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_{|}~]/, {
+  .regex(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^_{|}~]/, {
     message:
-      'Must contain at least one special character: ! \" # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~',
+      'Must contain at least one special character: ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~',
   })
 
 export const signUpSchema = z

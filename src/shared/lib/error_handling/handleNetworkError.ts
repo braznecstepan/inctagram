@@ -25,12 +25,16 @@ export function handleNetworkError({
     if (fetchError.status === 400) {
       const baseResponseError = fetchError.data as BaseResponseError
 
-      const message =
-        baseResponseError.messages.length > 0
-          ? baseResponseError.messages[0].message
-          : baseResponseError.error
-            ? baseResponseError.error
-            : 'Something went wrong'
+      let message: string
+
+      if (baseResponseError.messages.length > 0) {
+        message = baseResponseError.messages[0].message
+      } else if (baseResponseError.error) {
+        message = baseResponseError.error
+      } else {
+        message = 'Something went wrong'
+      }
+
       dispatch(changeError({ error: message }))
       handle400Error?.(baseResponseError)
     } else if (fetchError.status === 429) {

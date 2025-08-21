@@ -8,7 +8,7 @@ import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
 
 export const RecoveryPassword = () => {

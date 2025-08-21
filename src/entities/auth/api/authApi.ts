@@ -29,21 +29,21 @@ export const authApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    registration: builder.mutation<any, RegistrationArgs>({
+    registration: builder.mutation<void, RegistrationArgs>({
       query: body => ({
         url: '/api/v1/auth/registration',
         method: 'POST',
         body,
       }),
     }),
-    registrationConfirmation: builder.mutation<any, RegistrationConfirmationArgs>({
+    registrationConfirmation: builder.mutation<void, RegistrationConfirmationArgs>({
       query: body => ({
         url: '/api/v1/auth/registration-confirmation',
         method: 'POST',
         body,
       }),
     }),
-    registrationEmailResending: builder.mutation<any, RegistrationEmailResendingArgs>({
+    registrationEmailResending: builder.mutation<void, RegistrationEmailResendingArgs>({
       query: body => ({
         url: '/api/v1/auth/registration-email-resending',
         method: 'POST',
@@ -67,5 +67,5 @@ export const {
   useRegistrationMutation,
   useRegistrationConfirmationMutation,
   useRegistrationEmailResendingMutation,
-  useRecoveryPasswordMutation
+  useRecoveryPasswordMutation,
 } = authApi
