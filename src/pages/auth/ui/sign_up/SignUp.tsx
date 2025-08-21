@@ -1,39 +1,71 @@
 import { EyeOffOutline, EyeOutline, GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/shared/ui/icons'
-import { Button, Card, TextField } from '@/shared/ui'
+import { Button, Card, Dialog, TextField } from '@/shared/ui'
 
 import s from './SignUp.module.scss'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
-import { useToggleMode } from '@/shared/lib/hooks'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { Checkbox } from '@/shared/ui/checkbox/CheckBox'
+import { useAppDispatch, useToggleMode } from '@/shared/lib/hooks'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpSchema, signUpType } from '@/pages/auth/model/validation'
+import { ControlledCheckbox } from '@/entities/auth/ui'
+import { useRegistrationMutation } from '@/entities/auth/api'
+import { handleNetworkError } from '@/shared/lib'
+import { useMemo } from 'react'
 
 export function SignUp() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
   const { mode: showConfirmedPassword, toggleMode: toggleShowConfirmedPassword } = useToggleMode()
+  const { mode: showDialog, toggleMode: toggleShowDialog } = useToggleMode()
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors },
-  } = useForm<signUpType>({
-    defaultValues: {
+  const [registration] = useRegistrationMutation()
+
+  const dispatch = useAppDispatch()
+
+  const defaultValues = useMemo(() => {
+    return {
       name: '',
       email: '',
       password: '',
       passwordConfirmation: '',
       isAgree: false,
-    },
+    }
+  }, [])
+
+  const {
+    watch,
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<signUpType>({
+    defaultValues,
     resolver: zodResolver(signUpSchema),
+    mode: 'onChange',
   })
 
-  const handleFormSubmit: SubmitHandler<signUpType> = () => {
-    // console.log(data)
-    reset()
+  const emailValue = watch('email')
+
+  const handleFormSubmit: SubmitHandler<signUpType> = async (data: signUpType) => {
+    const registrationArgs = {
+      userName: data.name,
+      email: data.email,
+      password: data.password,
+      baseUrl: 'https://pikvio.ru/auth/confirmed-email',
+    }
+
+    try {
+      await registration(registrationArgs).unwrap()
+      toggleShowDialog()
+    } catch (error: unknown) {
+      handleNetworkError({ error, dispatch })
+    }
+  }
+
+  const onConfirmDialogClick = () => {
+    reset(defaultValues, { keepErrors: false, keepDirty: false, keepTouched: false })
+    toggleShowDialog()
   }
 
   const classnames = {
@@ -57,6 +89,16 @@ export function SignUp() {
 
   return (
     <div className={classnames.box}>
+      <Dialog
+        confirmButtonText={'OK'}
+        onConfirmButtonClick={onConfirmDialogClick}
+        open={showDialog}
+        size={'sm'}
+        title={'Email sent'}
+        buttonsMarginTop={'18px'}
+      >
+        <p>We have sent a link to confirm your email to {emailValue}</p>
+      </Dialog>
       <Card className={classnames.card}>
         <h1 className={classnames.title}>Sign Up</h1>
 
@@ -76,7 +118,6 @@ export function SignUp() {
             label={'Username'}
             errorMessage={errors.name && errors.name.message}
             {...register('name')}
-            required
           />
 
           <TextField
@@ -85,7 +126,6 @@ export function SignUp() {
             {...register('email')}
             placeholder={'it-incubator@gmail.com'}
             label={'Email'}
-            required
             type={'email'}
             autoComplete={'email'}
           />
@@ -100,7 +140,6 @@ export function SignUp() {
             iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowPassword}
             autoComplete={'new-password'}
-            required
           />
 
           <TextField
@@ -110,39 +149,36 @@ export function SignUp() {
             type={showConfirmedPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            required
             iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowConfirmedPassword}
             autoComplete={'new-password'}
           />
 
-          <Controller
+          <ControlledCheckbox
             control={control}
             name={'isAgree'}
-            render={({ field }) => (
-              <div className={classnames.isAgree}>
-                <Checkbox
-                  onChange={e => field.onChange(e)}
-                  required
-                  checked={field.value}
-                  label={
-                    <p className={classnames.compliance}>
-                      I agree to the{' '}
-                      <Button variant={'text'} className={classnames.termsOfServices} asChild>
-                        <Link href={AUTH_ROUTES.TERMS_OF_SERVICE}>Terms of Service</Link>
-                      </Button>{' '}
-                      and{' '}
-                      <Button variant={'text'} className={classnames.privacyPolicy} asChild>
-                        <Link href={AUTH_ROUTES.PRIVACY_POLICY}>Privacy Policy</Link>
-                      </Button>
-                    </p>
-                  }
-                />
-              </div>
-            )}
+            className={classnames.isAgree}
+            errorMessage={errors.isAgree && errors.isAgree.message}
+            label={
+              <p className={classnames.compliance}>
+                I agree to the{' '}
+                <Button variant={'text'} className={classnames.termsOfServices} asChild>
+                  <Link href={AUTH_ROUTES.TERMS_OF_SERVICE}>Terms of Service</Link>
+                </Button>{' '}
+                and{' '}
+                <Button variant={'text'} className={classnames.privacyPolicy} asChild>
+                  <Link href={AUTH_ROUTES.PRIVACY_POLICY}>Privacy Policy</Link>
+                </Button>
+              </p>
+            }
           />
 
-          <Button variant={'primary'} className={classnames.signUp} type={'submit'}>
+          <Button
+            disabled={!isValid || isSubmitting}
+            variant={'primary'}
+            className={classnames.signUp}
+            type={'submit'}
+          >
             Sign Up
           </Button>
         </form>

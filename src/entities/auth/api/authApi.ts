@@ -1,5 +1,12 @@
 import { baseApi } from '@/shared/api'
-import { LoginRequest, LoginResponse, MeResponse } from '@/entities/auth/types/authApi.types'
+import {
+  LoginRequest,
+  LoginResponse,
+  MeResponse,
+  RegistrationArgs,
+  RegistrationConfirmationArgs,
+  RegistrationEmailResendingArgs,
+} from '@/entities/auth/api/authApi.types'
 
 type RecoveryPasswordRequest = {
   email: string
@@ -22,6 +29,27 @@ export const authApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    registration: builder.mutation<void, RegistrationArgs>({
+      query: body => ({
+        url: '/api/v1/auth/registration',
+        method: 'POST',
+        body,
+      }),
+    }),
+    registrationConfirmation: builder.mutation<void, RegistrationConfirmationArgs>({
+      query: body => ({
+        url: '/api/v1/auth/registration-confirmation',
+        method: 'POST',
+        body,
+      }),
+    }),
+    registrationEmailResending: builder.mutation<void, RegistrationEmailResendingArgs>({
+      query: body => ({
+        url: '/api/v1/auth/registration-email-resending',
+        method: 'POST',
+        body,
+      }),
+    }),
     recoveryPassword: builder.mutation<void, RecoveryPasswordRequest>({
       query: body => ({
         url: '/api/v1/auth/password-recovery',
@@ -32,4 +60,12 @@ export const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useMeQuery, useLoginMutation, useLazyMeQuery, useRecoveryPasswordMutation } = authApi
+export const {
+  useMeQuery,
+  useLoginMutation,
+  useLazyMeQuery,
+  useRegistrationMutation,
+  useRegistrationConfirmationMutation,
+  useRegistrationEmailResendingMutation,
+  useRecoveryPasswordMutation,
+} = authApi
