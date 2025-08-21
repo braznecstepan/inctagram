@@ -39,6 +39,11 @@ export function handleNetworkError({
     } else if (fetchError.status === 401) {
       dispatch(changeError({ error: 'Unauthorized' }))
       handle401Error?.()
+    } else {
+      dispatch(
+        changeError({ error: `Oops! Something went wrong. Error status: ${fetchError.status}` })
+      )
+      handleUnknownError?.(error)
     }
   } else {
     dispatch(changeError({ error: 'Oops! Something went wrong. See error in browser console' }))
