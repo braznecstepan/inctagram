@@ -1,6 +1,12 @@
 import { baseApi } from '@/shared/api'
 import { LoginRequest, LoginResponse, MeResponse } from '@/entities/auth/types/authApi.types'
 
+type RecoveryPasswordRequest = {
+  email: string
+  recaptcha: string
+  baseUrl: string
+}
+
 export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation<LoginResponse, LoginRequest>({
@@ -16,7 +22,14 @@ export const authApi = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    recoveryPassword: builder.mutation<void, RecoveryPasswordRequest>({
+      query: body => ({
+        url: '/api/v1/auth/password-recovery',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
-export const { useMeQuery, useLoginMutation, useLazyMeQuery } = authApi
+export const { useMeQuery, useLoginMutation, useLazyMeQuery, useRecoveryPasswordMutation } = authApi

@@ -1,3 +1,4 @@
+'use client'
 import { Button, Card, Container, Dialog, TextField } from '@/shared/ui'
 import s from './RecoveryPassword.module.scss'
 import Link from 'next/link'
@@ -6,9 +7,17 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAppDispatch } from '@/shared/lib/hooks'
+import { changeError } from '@/shared/api/base-slice'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
 
 export const RecoveryPassword = () => {
   const [modalOpen, setModalOpen] = useState(false)
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  console.log(recaptchaToken)
+  const [recoveryPassword] = useRecoveryPasswordMutation()
+  const dispatch = useAppDispatch()
   const {
     watch,
     register,
@@ -24,14 +33,31 @@ export const RecoveryPassword = () => {
   })
   const value = watch().email
 
-  const handleFormSubmit: SubmitHandler<recoveryPasswordType> = data => {
-    setModalOpen(true)
-    console.log(data)
+  const handleFormSubmit: SubmitHandler<recoveryPasswordType> = async data => {
+    if (!recaptchaToken) {
+      dispatch(changeError({ error: 'Пожалуйста, подтвердите что вы не робот' }))
+      return
+    }
+
+    const obj = {
+      email: data.email,
+      recaptcha: recaptchaToken,
+      baseUrl: process.env.NEXT_PUBLIC_BASEURL!,
+    }
+    try {
+      await recoveryPassword(obj)
+      setModalOpen(true)
+    } catch (error) {
+      dispatch(changeError({ error: 'Ошибка обработки reCaptcha' }))
+    }
   }
 
   const closeHandler = () => {
     setModalOpen(false)
     reset()
+  }
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token)
   }
 
   return (
@@ -62,14 +88,21 @@ export const RecoveryPassword = () => {
             Enter your email address and we will send you further instructions{' '}
           </p>
           <div className={s.buttonBox}>
-            <Button disabled={!!errors.email} type={'submit'} fullWidth>
+            <Button disabled={!!errors.email || !recaptchaToken} type={'submit'} fullWidth>
               Send Link
             </Button>
             <Button variant={'text'} fullWidth asChild>
               <Link href={AUTH_ROUTES.SIGN_IN}>Back to Sigh In</Link>
             </Button>
           </div>
-          {/*// TODO:Captcha*/}
+          <div data-theme={'dark'}>
+            <ReCAPTCHA
+              size={'normal'}
+              onChange={handleRecaptchaChange}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              className={s.recaptcha}
+            />
+          </div>
         </form>
       </Card>
     </Container>
