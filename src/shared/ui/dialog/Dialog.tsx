@@ -2,7 +2,7 @@ import { Button, Modal } from '@/shared/ui'
 
 import s from './Dialog.module.scss'
 import { clsx } from 'clsx'
-import { FC } from 'react'
+import { CSSProperties, FC } from 'react'
 import { ModalProps } from '@/shared/ui/modal/Modal'
 import { ButtonVariant } from '@/shared/ui/button/Button'
 
@@ -19,6 +19,7 @@ export type DialogProps = {
   onCancelButtonClick?: () => void
   onConfirmButtonClick: () => void
   buttonsClass?: string
+  buttonsMarginTop?: CSSProperties['marginTop']
 } & ModalProps
 
 export const Dialog: FC<DialogProps> = ({
@@ -29,6 +30,7 @@ export const Dialog: FC<DialogProps> = ({
   onConfirmButtonClick,
   onCancelButtonClick,
   buttonsClass,
+  buttonsMarginTop,
   ...rest
 }) => {
   const { onClose } = rest
@@ -60,7 +62,7 @@ export const Dialog: FC<DialogProps> = ({
   return (
     <Modal onClose={handleCancelButtonClick} {...rest}>
       {children}
-      <div className={classnames.buttonsBox}>
+      <div style={{ marginTop: buttonsMarginTop }} className={classnames.buttonsBox}>
         {
           <Button
             onClick={handleConfirmButtonClick}

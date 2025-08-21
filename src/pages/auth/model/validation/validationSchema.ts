@@ -2,46 +2,57 @@ import { z } from 'zod'
 
 const nameSchema = z
   .string()
-  .min(2, { message: 'Minimum number of characters 2' })
+  .min(2, { message: 'Minimum number of characters 6' })
   .max(30, { message: 'Maximum number of characters 30' })
+  .regex(/^[a-zA-Z0-9_-]+$/, {
+    message: 'Only letters, numbers, underscore, and hyphen are allowed',
+  })
 
-const emailSchema = z.string().regex(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, {
-  message: 'The email must match the format example@example.com',
-})
+const emailSchema = z.email({ message: 'The email must match the format example@example.com' })
 
 const passwordSchema = z
   .string()
   .min(6, { message: 'Minimum number of characters 6' })
   .max(20, { message: 'Maximum number of characters 20' })
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,20}$/, {
+  .regex(/[0-9]/, { message: 'Must contain at least one digit (0-9)' })
+  .regex(/[A-Z]/, { message: 'Must contain at least one uppercase letter (A-Z)' })
+  .regex(/[a-z]/, { message: 'Must contain at least one lowercase letter (a-z)' })
+  .regex(/[!\"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_{|}~]/, {
     message:
-      'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      'Must contain at least one special character: ! \" # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ { | } ~',
   })
 
-const passwordConfirmSchema = z
-  .string()
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{6,20}$/, {
-    message:
-      'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+export const signUpSchema = z
+  .object({
+    name: nameSchema,
+    email: emailSchema,
+    password: passwordSchema,
+    passwordConfirmation: passwordSchema,
+    isAgree: z.boolean(),
   })
-
-export const signUpSchema = z.object({
-  name: nameSchema,
-  email: emailSchema,
-  password: passwordSchema,
-  passwordConfirmation: passwordConfirmSchema,
-  isAgree: z.boolean(),
-})
+  .refine(data => data.password === data.passwordConfirmation, {
+    message: 'Passwords must match',
+    path: ['passwordConfirmation'],
+  })
+  .refine(data => data.isAgree, {
+    message: 'You’ll need to agree to proceed',
+    path: ['isAgree'],
+  })
 
 export const signInSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
 })
 
-export const newPasswordShema = z.object({
-  password: passwordSchema,
-  passwordConfirmation: passwordConfirmSchema,
-})
+export const newPasswordSchema = z
+  .object({
+    password: passwordSchema,
+    passwordConfirmation: passwordSchema,
+  })
+  .refine(data => data.password === data.passwordConfirmation, {
+    message: 'Passwords must match',
+    path: ['passwordConfirmation'],
+  })
 
 export const recoveryPasswordSchema = z.object({
   email: emailSchema,
@@ -49,5 +60,5 @@ export const recoveryPasswordSchema = z.object({
 
 export type signInType = z.infer<typeof signInSchema>
 export type signUpType = z.infer<typeof signUpSchema>
-export type newPasswordType = z.infer<typeof newPasswordShema>
+export type newPasswordType = z.infer<typeof newPasswordSchema>
 export type recoveryPasswordType = z.infer<typeof recoveryPasswordSchema>

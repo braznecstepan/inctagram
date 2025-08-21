@@ -1,5 +1,4 @@
-'use client'
-import { Button, Card, Container, Dialog, TextField } from '@/shared/ui'
+import { Button, Card, Dialog, TextField } from '@/shared/ui'
 import s from './RecoveryPassword.module.scss'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
@@ -64,7 +63,7 @@ export const RecoveryPassword = () => {
   }
 
   return (
-    <Container>
+    <div className={s.box}>
       <Card className={s.card}>
         <h1 className={s.title}>Forgot Password</h1>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -108,6 +107,6 @@ export const RecoveryPassword = () => {
           </div>
         </form>
       </Card>
-    </Container>
+    </div>
   )
 }

@@ -4,7 +4,7 @@ import { Mutex } from 'async-mutex'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://inctagram.work',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   prepareHeaders: headers => {
     const token = localStorage.getItem('token')
 

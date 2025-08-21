@@ -3,7 +3,7 @@
 .box {
   display: flex;
   justify-content: center;
-  margin: 96px 15px;
+  margin: 36px 0;
 }
 
 .card {
@@ -52,13 +52,13 @@
 }
 
 .isAgree {
-  margin-top: 12px;
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
 }
 
 .compliance {
   @include t.uik-small-text;
-
-  margin: 0 auto;
 }
 
 .termsOfService,
@@ -70,7 +70,7 @@
 }
 
 .signUp {
-  margin-top: 12px;
+  margin-top: 22px;
 }
 
 .question {
