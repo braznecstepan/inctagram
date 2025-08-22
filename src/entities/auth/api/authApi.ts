@@ -2,6 +2,7 @@ import { baseApi } from '@/shared/api'
 import {
   LoginRequest,
   LoginResponse,
+  LogoutResponse,
   MeResponse,
   RegistrationArgs,
   RegistrationConfirmationArgs,
@@ -21,6 +22,12 @@ export const authApi = baseApi.injectEndpoints({
         url: '/api/v1/auth/login',
         method: 'POST',
         body: obj,
+      }),
+    }),
+    logout: builder.mutation<LogoutResponse, void>({
+      query: () => ({
+        url: '/api/v1/auth/logout',
+        method: 'POST',
       }),
     }),
     me: builder.query<MeResponse, void>({
@@ -68,4 +75,5 @@ export const {
   useRegistrationConfirmationMutation,
   useRegistrationEmailResendingMutation,
   useRecoveryPasswordMutation,
+  useLogoutMutation,
 } = authApi
