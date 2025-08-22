@@ -1,3 +1,4 @@
+'use client'
 import { Button, Card, Dialog, TextField } from '@/shared/ui'
 import s from './RecoveryPassword.module.scss'
 import Link from 'next/link'
@@ -8,14 +9,17 @@ import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
-import { ReCAPTCHA } from 'react-google-recaptcha'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
+//import dynamic from 'next/dynamic'
 
+// const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
+//   ssr: false,
+//   loading: () => <div>Загрузка</div>,
+// })
 export const RecoveryPassword = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
-
-  console.log(recaptchaToken)
   const [recoveryPassword] = useRecoveryPasswordMutation()
   const dispatch = useAppDispatch()
   const {
@@ -29,7 +33,7 @@ export const RecoveryPassword = () => {
       email: '',
     },
     resolver: zodResolver(recoveryPasswordSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   })
   const value = watch().email
 
@@ -43,7 +47,7 @@ export const RecoveryPassword = () => {
     const obj = {
       email: data.email,
       recaptcha: recaptchaToken,
-      baseUrl: process.env.NEXT_PUBLIC_BASE_URL!,
+      baseUrl: process.env.NEXT_PUBLIC_DOMAIN!,
     }
 
     try {
@@ -90,21 +94,20 @@ export const RecoveryPassword = () => {
             Enter your email address and we will send you further instructions{' '}
           </p>
           <div className={s.buttonBox}>
-            <Button disabled={!!errors.email || !recaptchaToken} type={'submit'} fullWidth>
+            <Button disabled={!value || !recaptchaToken} type={'submit'} fullWidth>
               Send Link
             </Button>
             <Button variant={'text'} fullWidth asChild>
               <Link href={AUTH_ROUTES.SIGN_IN}>Back to Sigh In</Link>
             </Button>
           </div>
-          <div data-theme={'dark'}>
-            <ReCAPTCHA
-              size={'normal'}
-              onChange={handleRecaptchaChange}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-              className={s.recaptcha}
-            />
-          </div>
+          <ReCAPTCHA
+            size={'normal'}
+            onChange={handleRecaptchaChange}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            className={s.recaptcha}
+            theme={'dark'}
+          />
         </form>
       </Card>
     </div>
