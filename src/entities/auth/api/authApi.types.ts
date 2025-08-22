@@ -7,6 +7,13 @@ export type LoginResponse = {
   accessToken: string
 }
 
+export type LogoutResponse = {
+  statusCode: number
+  message: string
+  timestamp: string
+  path: string
+}
+
 export type MeResponse = {
   userId: string
   userName: string
