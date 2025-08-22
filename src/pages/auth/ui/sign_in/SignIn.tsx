@@ -11,7 +11,7 @@ import { useAppDispatch, useToggleMode } from '@/shared/lib/hooks'
 import { useLoginMutation } from '@/entities/auth/api/authApi'
 import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
-import { changeError } from '@/shared/api/base-slice'
+import { handleNetworkError } from '@/shared/lib'
 
 export function SignIn() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
@@ -23,14 +23,14 @@ export function SignIn() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<signInType>({
     defaultValues: {
       email: '',
       password: '',
     },
     resolver: zodResolver(signInSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   })
 
   const handleFormSubmit: SubmitHandler<signInType> = async data => {
@@ -48,7 +48,7 @@ export function SignIn() {
       }
       reset()
     } catch (error: unknown) {
-      dispatch(changeError({ error: 'The email must match the format example@example.com' }))
+      handleNetworkError({ error, dispatch })
     }
   }
 
@@ -107,7 +107,12 @@ export function SignIn() {
             <Link href={AUTH_ROUTES.RECOVERY}>Forgot Password</Link>
           </Button>
 
-          <Button variant={'primary'} className={classnames.signIn} type={'submit'}>
+          <Button
+            disabled={!isValid || isSubmitting}
+            variant={'primary'}
+            className={classnames.signIn}
+            type={'submit'}
+          >
             Sign In
           </Button>
         </form>

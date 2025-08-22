@@ -52,7 +52,7 @@ export function SignUp() {
       userName: data.name,
       email: data.email,
       password: data.password,
-      baseUrl: 'https://pikvio.ru/auth/confirmed-email',
+      baseUrl: process.env.NEXT_PUBLIC_DOMAIN ?? '',
     }
 
     try {

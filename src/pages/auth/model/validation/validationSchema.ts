@@ -58,7 +58,12 @@ export const recoveryPasswordSchema = z.object({
   email: emailSchema,
 })
 
+export const expiredLinkSchema = z.object({
+  email: emailSchema,
+})
+
 export type signInType = z.infer<typeof signInSchema>
 export type signUpType = z.infer<typeof signUpSchema>
 export type newPasswordType = z.infer<typeof newPasswordSchema>
 export type recoveryPasswordType = z.infer<typeof recoveryPasswordSchema>
+export type expiredLinkType = z.infer<typeof expiredLinkSchema>

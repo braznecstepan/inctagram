@@ -39,6 +39,7 @@
   &.disabled {
     color: var(--color-light-900);
     background-color: var(--color-accent-900);
+    cursor: not-allowed;
   }
 }
 
@@ -60,6 +61,7 @@
   &.disabled {
     color: var(--color-light-900);
     background-color: var(--color-dark-500);
+    cursor: not-allowed;
   }
 }
 
@@ -86,6 +88,7 @@
   &.disabled {
     color: var(--color-accent-900);
     outline: 1px solid var(--color-accent-900);
+    cursor: not-allowed;
   }
 }
 
@@ -109,5 +112,6 @@
 
   &.disabled {
     color: var(--color-accent-900);
+    cursor: not-allowed;
   }
 }
