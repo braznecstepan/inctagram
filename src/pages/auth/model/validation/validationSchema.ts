@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const nameSchema = z
   .string()
-  .min(2, { message: 'Minimum number of characters 6' })
+  .min(2, { message: 'Minimum number of characters 2' })
   .max(30, { message: 'Maximum number of characters 30' })
   .regex(/^[a-zA-Z0-9_-]+$/, {
     message: 'Only letters, numbers, underscore, and hyphen are allowed',
