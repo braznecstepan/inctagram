@@ -43,7 +43,7 @@ export const RecoveryPassword = () => {
     const obj = {
       email: data.email,
       recaptcha: recaptchaToken,
-      baseUrl: process.env.NEXT_PUBLIC_BASEURL!,
+      baseUrl: process.env.NEXT_PUBLIC_BASE_URL!,
     }
 
     try {
