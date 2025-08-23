@@ -19,3 +19,8 @@
   display: inline-block;
   margin-left: 32px;
 }
+
+.open {
+  border: 1px solid var(--color-light-100);
+  background-color: var(--color-dark-500);
+}

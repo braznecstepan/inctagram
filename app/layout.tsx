@@ -3,9 +3,9 @@ import React from 'react'
 import '@/shared/ui/styles/root_variables/index.css'
 import '@/shared/ui/styles/index.scss'
 import StoreProvider from '@/app/storeProvider'
-import { Header } from '@/widgets'
 import { PopUp } from '@/shared/ui/popUp/PopUp'
 import s from '../src/app/layout.module.scss'
+import { Header } from '@/widgets'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
