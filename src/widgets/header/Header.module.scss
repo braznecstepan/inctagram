@@ -25,6 +25,7 @@
 .buttonWrapper {
   display: flex;
   gap: 24px;
+  margin-left: 36px;
 
   button {
     width: 100px;
@@ -49,8 +50,6 @@
 
   svg {
     cursor: pointer;
-    margin-top: 6px;
-    margin-right: 45px;
   }
 
   select {

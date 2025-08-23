@@ -1,16 +1,15 @@
 'use client'
 import s from './Header.module.scss'
 import { Button, Container } from '@/shared/ui'
-import OutlineBell from '@/shared/ui/icons/OutlineBell'
-import { selectIsLoggedIn, selectNotificationStatus } from '@/shared/api/base-slice'
+import { selectIsLoggedIn } from '@/shared/api/base-slice'
 import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
 import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/shared/lib/hooks'
+import { HeaderSelect } from '@/shared/ui/select/ui'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
-  const notificationStatus = useAppSelector(selectNotificationStatus)
   const router = useRouter()
 
   return (
@@ -21,7 +20,6 @@ export const Header = () => {
             <h1>Inctagram</h1>
           </button>
           <div className={s.selectBox}>
-            {isLoggedIn && notificationStatus && <OutlineBell />}
             <Tooltip side={'bottom'}>
               <Scrollbar maxHeight={425} type={'scroll'}>
                 <p>
@@ -50,12 +48,7 @@ export const Header = () => {
                 </p>
               </Scrollbar>
             </Tooltip>
-            {/*Заглушка select, тут должен быть drop-down*/}
-            <select defaultValue={'1'}>
-              <option value={'1'}>1</option>
-              <option value={'2'}>2</option>
-              <option value={'3'}>3</option>
-            </select>
+            <HeaderSelect />
             {!isLoggedIn && (
               <div className={s.buttonWrapper}>
                 <Button onClick={() => router.push('/auth/sign-in')} variant={'outlined'}>

@@ -18,7 +18,11 @@
 }
 
 .infoIcon {
+  display: block;
+  margin-top: 6px;
+  margin-right: 45px;
   color: var(--color-light-100);
+
   transition: var(--transtition-duration-basic) color;
 }
 

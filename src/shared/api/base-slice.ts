@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { LocaleType } from '@/shared/types'
 
 export const baseSlice = createSlice({
   name: 'baseSlice',
@@ -6,6 +7,7 @@ export const baseSlice = createSlice({
     isLoggedIn: false,
     notificationStatus: false,
     error: null as string | null,
+    locale: 'en' as LocaleType,
   },
   reducers: create => ({
     meAC: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
@@ -17,14 +19,19 @@ export const baseSlice = createSlice({
     changeError: create.reducer<{ error: string }>((state, action) => {
       state.error = action.payload.error
     }),
+    changeLocale: create.reducer<{ locale: LocaleType }>((state, action) => {
+      state.locale = action.payload.locale
+    }),
   }),
   selectors: {
     selectIsLoggedIn: state => state.isLoggedIn,
     selectNotificationStatus: state => state.notificationStatus,
     selectError: state => state.error,
+    selectLocale: state => state.locale,
   },
 })
 
-export const { selectIsLoggedIn, selectNotificationStatus, selectError } = baseSlice.selectors
+export const { selectIsLoggedIn, selectNotificationStatus, selectError, selectLocale } =
+  baseSlice.selectors
 export const baseReducer = baseSlice.reducer
-export const { meAC, changeNewMessage, changeError } = baseSlice.actions
+export const { meAC, changeNewMessage, changeError, changeLocale } = baseSlice.actions
