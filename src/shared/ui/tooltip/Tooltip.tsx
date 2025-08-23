@@ -1,3 +1,4 @@
+'use client'
 import { ComponentProps, ReactNode, useState } from 'react'
 
 import * as TooltipRadix from '@radix-ui/react-tooltip'
@@ -6,6 +7,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import s from './Tooltip.module.scss'
 import { OutlineBell } from '@/shared/ui/icons'
+import { useAppSelector } from '@/shared/lib/hooks'
+import { selectNotificationStatus } from '@/shared/api/base-slice'
+import FillBell from '@/shared/ui/icons/FillBell'
 
 type CommonProps = {
   children: ReactNode
@@ -47,7 +51,7 @@ export const Tooltip = ({
   ...props
 }: TooltipProps) => {
   const [open, setOpen] = useState(false)
-
+  const notificationStatus = useAppSelector(selectNotificationStatus)
   const classNames = {
     arrow: s.arrow,
     arrowBox: s.arrowBox,
@@ -64,9 +68,7 @@ export const Tooltip = ({
     tooltipTrigger = (
       <button className={classNames.iconButton} type={'button'}>
         {icon ?? (
-          <span className={s.infoIcon}>
-            <OutlineBell />
-          </span>
+          <span className={s.infoIcon}>{notificationStatus ? <OutlineBell /> : <FillBell />}</span>
         )}
       </button>
     )
