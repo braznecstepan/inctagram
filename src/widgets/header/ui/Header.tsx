@@ -6,7 +6,7 @@ import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
 import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/shared/lib/hooks'
-import { HeaderSelect } from '@/shared/ui/select/ui'
+import { HeaderSelect } from '@/widgets/header/ui/headerSelect/HeaderSelect'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)

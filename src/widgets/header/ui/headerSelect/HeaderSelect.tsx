@@ -1,17 +1,16 @@
 'use client'
 import * as React from 'react'
+import { useState } from 'react'
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from '../baseSelect/Select'
+} from '@/shared/ui/select/Select'
 import FlagRussia from '@/shared/ui/icons/FlagRussia'
 import FlagUnitedKingdom from '@/shared/ui/icons/FlagUnitedKingdom'
-import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { changeLocale, selectLocale } from '@/shared/api/base-slice'
 import s from './HeaderSelect.module.scss'
@@ -40,7 +39,6 @@ export function HeaderSelect() {
             <FlagUnitedKingdom className={s.icon} />
             <span className={s.text}>English</span>
           </SelectItem>
-          <SelectSeparator />
           <SelectItem value={'ru'}>
             <FlagRussia className={s.icon} />
             <span className={s.text}>Russian</span>

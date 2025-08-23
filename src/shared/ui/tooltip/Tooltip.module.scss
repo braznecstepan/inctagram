@@ -1,7 +1,8 @@
 .content {
   position: relative;
   z-index: var(--z-index-modal-content);
-  right: 140px;
+  top: 15px;
+  right: 115px;
 
   width: 370px;
   max-width: 370px;
@@ -19,8 +20,10 @@
 
 .infoIcon {
   display: block;
-  margin-top: 6px;
+
+  margin-top: 7px;
   margin-right: 45px;
+
   color: var(--color-light-100);
 
   transition: var(--transtition-duration-basic) color;
@@ -28,6 +31,12 @@
 
 .iconButton {
   all: unset;
+
+  width: 24px;
+  height: 24px;
+  margin-right: 45px;
+  margin-bottom: 15px;
+
   text-align: center;
 
   &:hover .infoIcon,
