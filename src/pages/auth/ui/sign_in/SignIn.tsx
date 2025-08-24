@@ -12,6 +12,7 @@ import { useLoginMutation } from '@/entities/auth/api/authApi'
 import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
 import { handleNetworkError } from '@/shared/lib'
+import { changeIsLoggedIn } from '@/shared/api/base-slice'
 
 export function SignIn() {
   const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
@@ -46,6 +47,7 @@ export function SignIn() {
         }
         router.push('/profile_settings')
       }
+      dispatch(changeIsLoggedIn({ isLoggedIn: true }))
       reset()
     } catch (error: unknown) {
       handleNetworkError({ error, dispatch })
