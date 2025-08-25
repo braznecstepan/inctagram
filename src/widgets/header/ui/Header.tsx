@@ -7,6 +7,7 @@ import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/shared/lib/hooks'
 import { HeaderSelect } from '@/widgets/header/ui/headerSelect/HeaderSelect'
+import { Logout } from '@/features/auth'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -49,7 +50,9 @@ export const Header = () => {
               </Scrollbar>
             </Tooltip>
             <HeaderSelect />
-            {!isLoggedIn && (
+            {isLoggedIn ? (
+              <Logout />
+            ) : (
               <div className={s.buttonWrapper}>
                 <Button onClick={() => router.push('/auth/sign-in')} variant={'outlined'}>
                   Log in
