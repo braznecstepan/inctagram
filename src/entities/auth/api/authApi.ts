@@ -2,7 +2,6 @@ import { baseApi } from '@/shared/api'
 import {
   LoginRequest,
   LoginResponse,
-  LogoutResponse,
   MeResponse,
   RegistrationArgs,
   RegistrationConfirmationArgs,

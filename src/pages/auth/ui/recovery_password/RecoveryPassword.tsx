@@ -9,7 +9,7 @@ import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
 //import dynamic from 'next/dynamic'
 
@@ -53,7 +53,7 @@ export const RecoveryPassword = () => {
     try {
       await recoveryPassword(obj)
       setModalOpen(true)
-    } catch (error) {
+    } catch {
       dispatch(changeError({ error: 'Ошибка обработки reCaptcha' }))
     }
   }

@@ -1,6 +1,6 @@
 @use '../styles/typography' as t;
 
-.trigger {;
+.trigger {
   cursor: pointer;
 
   display: flex;
@@ -12,10 +12,11 @@
 
   background: transparent;
 
-  transition: color 0.15s, box-shadow 0.15s;
+  transition:
+    color 0.15s,
+    box-shadow 0.15s;
 
   @include t.uik-regular-text-16;
-
 }
 
 .trigger:hover {
@@ -66,18 +67,22 @@
   color: inherit;
 
   background: transparent;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
-
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 10%),
+    0 1px 2px 0 rgb(0 0 0 / 6%);
 }
 
 .contentOpen {
-  animation: fade-in 0.2s ease-out, zoom-in 0.2s ease-out;
+  animation:
+    fade-in 0.2s ease-out,
+    zoom-in 0.2s ease-out;
 }
 
 .contentClosed {
-  animation: fade-out 0.2s ease-in, zoom-out 0.2s ease-in;
+  animation:
+    fade-out 0.2s ease-in,
+    zoom-out 0.2s ease-in;
 }
-
 
 .viewportPopper {
   scroll-margin: 0.25rem;
@@ -101,16 +106,13 @@
   @include t.uik-regular-text-16;
 }
 
-
-
-
 .item:focus {
   color: hsl(var(--accent-foreground));
   background: var(--color-dark-500);
 }
 
 .item:hover {
-  color: var(--color-accent-500)
+  color: var(--color-accent-500);
 }
 
 .itemDisabled {

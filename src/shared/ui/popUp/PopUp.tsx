@@ -1,5 +1,4 @@
 'use client'
-import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Toast from '@radix-ui/react-toast'
 import styles from './PopUp.module.scss'
@@ -21,7 +20,7 @@ export const PopUp = () => {
     }, 2000)
 
     return () => clearTimeout(id)
-  }, [error])
+  }, [error, dispatch])
 
   return (
     <Toast.Provider duration={2000} swipeDirection={'right'}>
