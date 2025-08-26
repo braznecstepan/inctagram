@@ -6,24 +6,15 @@ import { AUTH_ROUTES } from '@/shared/lib/routes'
 import s from './ConfirmedEmail.module.scss'
 
 export function ConfirmedEmail() {
-  const classnames = {
-    box: s.box,
-    title: s.title,
-    message: s.message,
-    buttonImageBox: s.buttonImageBox,
-    signIn: s.signIn,
-    image: s.image,
-  }
-
   return (
-    <div className={classnames.box}>
-      <h1 className={classnames.title}>Congratulations!</h1>
-      <p className={classnames.message}>You email has been confirmed</p>
-      <div className={classnames.buttonImageBox}>
-        <Button className={classnames.signIn} asChild>
+    <div className={s.box}>
+      <h1 className={s.title}>Congratulations!</h1>
+      <p className={s.message}>You email has been confirmed</p>
+      <div className={s.buttonImageBox}>
+        <Button className={s.signIn} asChild>
           <Link href={AUTH_ROUTES.SIGN_IN}>Sign In</Link>
         </Button>
-        <ConfirmedImage className={classnames.image} />
+        <ConfirmedImage className={s.image} />
       </div>
     </div>
   )

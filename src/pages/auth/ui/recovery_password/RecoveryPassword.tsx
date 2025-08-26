@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { recoveryPasswordSchema, recoveryPasswordType } from '@/pages/auth/model/validation'
+import { recoveryPasswordSchema, RecoveryPasswordType } from '@/pages/auth/model/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
@@ -28,7 +28,7 @@ export const RecoveryPassword = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<recoveryPasswordType>({
+  } = useForm<RecoveryPasswordType>({
     defaultValues: {
       email: '',
     },
@@ -37,7 +37,7 @@ export const RecoveryPassword = () => {
   })
   const value = watch().email
 
-  const handleFormSubmit: SubmitHandler<recoveryPasswordType> = async data => {
+  const handleFormSubmit: SubmitHandler<RecoveryPasswordType> = async data => {
     if (!recaptchaToken) {
       dispatch(changeError({ error: 'Пожалуйста, подтвердите что вы не робот' }))
 

@@ -6,16 +6,17 @@ import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signInSchema, signInType } from '@/pages/auth/model/validation'
-import { useAppDispatch, useToggleMode } from '@/shared/lib/hooks'
+import { signInSchema, SignInType } from '@/pages/auth/model/validation'
+import { useAppDispatch } from '@/shared/lib/hooks'
 import { useLoginMutation } from '@/entities/auth/api/authApi'
 import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
 import { handleNetworkError } from '@/shared/lib'
 import { changeIsLoggedIn } from '@/shared/api/base-slice'
+import { useBoolean } from 'react-use'
 
 export function SignIn() {
-  const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
+  const [showPassword, toggleShowPassword] = useBoolean(false)
   const [loginFunc] = useLoginMutation()
   const [getProfile] = useLazyGetProfileQuery()
   const router = useRouter()
@@ -25,7 +26,7 @@ export function SignIn() {
     handleSubmit,
     reset,
     formState: { errors, isValid, isSubmitting },
-  } = useForm<signInType>({
+  } = useForm<SignInType>({
     defaultValues: {
       email: '',
       password: '',
@@ -34,7 +35,7 @@ export function SignIn() {
     mode: 'onChange',
   })
 
-  const handleFormSubmit: SubmitHandler<signInType> = async data => {
+  const handleFormSubmit: SubmitHandler<SignInType> = async data => {
     try {
       const res = await loginFunc(data).unwrap()
 
@@ -54,26 +55,12 @@ export function SignIn() {
     }
   }
 
-  const classnames = {
-    box: s.box,
-    card: s.card,
-    title: s.title,
-    icons: s.icons,
-    form: s.form,
-    email: s.email,
-    password: s.password,
-    forgotPassword: s.forgotPassword,
-    signIn: s.signIn,
-    question: s.question,
-    signUp: s.signUp,
-  }
-
   return (
-    <div className={classnames.box}>
-      <Card className={classnames.card}>
-        <h1 className={classnames.title}>Sign In</h1>
+    <div className={s.box}>
+      <Card className={s.card}>
+        <h1 className={s.title}>Sign In</h1>
 
-        <div className={classnames.icons}>
+        <div className={s.icons}>
           <Link href={AUTH_ROUTES.SIGN_IN}>
             <GoogleSvgrepoCom1 />
           </Link>
@@ -82,9 +69,9 @@ export function SignIn() {
           </Link>
         </div>
 
-        <form className={classnames.form} onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className={s.form} onSubmit={handleSubmit(handleFormSubmit)}>
           <TextField
-            className={classnames.email}
+            className={s.email}
             {...register('email')}
             errorMessage={errors.email && errors.email.message}
             placeholder={'it-incubator@gmail.com'}
@@ -94,7 +81,7 @@ export function SignIn() {
           />
 
           <TextField
-            className={classnames.password}
+            className={s.password}
             {...register('password')}
             errorMessage={errors.password && errors.password.message}
             type={showPassword ? 'text' : 'password'}
@@ -105,23 +92,23 @@ export function SignIn() {
             autoComplete={'current-password'}
           />
 
-          <Button variant={'text'} className={classnames.forgotPassword} asChild>
+          <Button variant={'text'} className={s.forgotPassword} asChild>
             <Link href={AUTH_ROUTES.RECOVERY}>Forgot Password</Link>
           </Button>
 
           <Button
             disabled={!isValid || isSubmitting}
             variant={'primary'}
-            className={classnames.signIn}
+            className={s.signIn}
             type={'submit'}
           >
             Sign In
           </Button>
         </form>
 
-        <p className={classnames.question}>{`Don't have an account?`}</p>
+        <p className={s.question}>{`Don't have an account?`}</p>
 
-        <Button variant={'text'} className={classnames.signUp} asChild>
+        <Button variant={'text'} className={s.signUp} asChild>
           <Link href={AUTH_ROUTES.SIGN_UP}>Sign Up</Link>
         </Button>
       </Card>

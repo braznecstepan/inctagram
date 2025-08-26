@@ -4,33 +4,31 @@ import { Button, Card, Dialog, TextField } from '@/shared/ui'
 import s from './SignUp.module.scss'
 import Link from 'next/link'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
-import { useAppDispatch, useToggleMode } from '@/shared/lib/hooks'
+import { useAppDispatch } from '@/shared/lib/hooks'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signUpSchema, signUpType } from '@/pages/auth/model/validation'
+import { signUpSchema, SignUpType } from '@/pages/auth/model/validation'
 import { ControlledCheckbox } from '@/entities/auth/ui'
 import { useRegistrationMutation } from '@/entities/auth/api'
 import { handleNetworkError } from '@/shared/lib'
-import { useMemo } from 'react'
+import { useBoolean } from 'react-use'
+
+const defaultValues = {
+  name: '',
+  email: '',
+  password: '',
+  passwordConfirmation: '',
+  isAgree: false,
+}
 
 export function SignUp() {
-  const { mode: showPassword, toggleMode: toggleShowPassword } = useToggleMode()
-  const { mode: showConfirmedPassword, toggleMode: toggleShowConfirmedPassword } = useToggleMode()
-  const { mode: showDialog, toggleMode: toggleShowDialog } = useToggleMode()
+  const [showPassword, toggleShowPassword] = useBoolean(false)
+  const [showConfirmedPassword, toggleShowConfirmedPassword] = useBoolean(false)
+  const [showDialog, toggleShowDialog] = useBoolean(false)
 
   const [registration] = useRegistrationMutation()
 
   const dispatch = useAppDispatch()
-
-  const defaultValues = useMemo(() => {
-    return {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      isAgree: false,
-    }
-  }, [])
 
   const {
     watch,
@@ -39,7 +37,7 @@ export function SignUp() {
     reset,
     control,
     formState: { errors, isValid, isSubmitting },
-  } = useForm<signUpType>({
+  } = useForm<SignUpType>({
     defaultValues,
     resolver: zodResolver(signUpSchema),
     mode: 'onChange',
@@ -47,7 +45,7 @@ export function SignUp() {
 
   const emailValue = watch('email')
 
-  const handleFormSubmit: SubmitHandler<signUpType> = async (data: signUpType) => {
+  const handleFormSubmit: SubmitHandler<SignUpType> = async (data: SignUpType) => {
     const registrationArgs = {
       userName: data.name,
       email: data.email,
@@ -68,27 +66,8 @@ export function SignUp() {
     toggleShowDialog()
   }
 
-  const classnames = {
-    box: s.box,
-    card: s.card,
-    title: s.title,
-    icons: s.icons,
-    form: s.form,
-    username: s.username,
-    email: s.email,
-    password: s.password,
-    passwordConfirmation: s.passwordConfirmation,
-    compliance: s.compliance,
-    termsOfServices: s.termsOfService,
-    privacyPolicy: s.privacyPolicy,
-    signUp: s.signUp,
-    question: s.question,
-    signIn: s.signIn,
-    isAgree: s.isAgree,
-  }
-
   return (
-    <div className={classnames.box}>
+    <div className={s.box}>
       <Dialog
         confirmButtonText={'OK'}
         onConfirmButtonClick={onConfirmDialogClick}
@@ -99,10 +78,10 @@ export function SignUp() {
       >
         <p>We have sent a link to confirm your email to {emailValue}</p>
       </Dialog>
-      <Card className={classnames.card}>
-        <h1 className={classnames.title}>Sign Up</h1>
+      <Card className={s.card}>
+        <h1 className={s.title}>Sign Up</h1>
 
-        <div className={classnames.icons}>
+        <div className={s.icons}>
           <Link href={AUTH_ROUTES.SIGN_UP}>
             <GoogleSvgrepoCom1 />
           </Link>
@@ -111,10 +90,10 @@ export function SignUp() {
           </Link>
         </div>
 
-        <form className={classnames.form} onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className={s.form} onSubmit={handleSubmit(handleFormSubmit)}>
           <TextField
-            className={classnames.username}
-            placeholder={'Dimych'}
+            className={s.username}
+            placeholder={'Username'}
             label={'Username'}
             errorMessage={errors.name && errors.name.message}
             {...register('name')}
@@ -122,7 +101,7 @@ export function SignUp() {
 
           <TextField
             errorMessage={errors.email && errors.email.message}
-            className={classnames.email}
+            className={s.email}
             {...register('email')}
             placeholder={'it-incubator@gmail.com'}
             label={'Email'}
@@ -131,7 +110,7 @@ export function SignUp() {
           />
 
           <TextField
-            className={classnames.password}
+            className={s.password}
             errorMessage={errors.password && errors.password.message}
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
@@ -143,7 +122,7 @@ export function SignUp() {
           />
 
           <TextField
-            className={classnames.passwordConfirmation}
+            className={s.passwordConfirmation}
             errorMessage={errors.passwordConfirmation && errors.passwordConfirmation.message}
             {...register('passwordConfirmation')}
             type={showConfirmedPassword ? 'text' : 'password'}
@@ -157,16 +136,16 @@ export function SignUp() {
           <ControlledCheckbox
             control={control}
             name={'isAgree'}
-            className={classnames.isAgree}
+            className={s.isAgree}
             errorMessage={errors.isAgree && errors.isAgree.message}
             label={
-              <p className={classnames.compliance}>
+              <p className={s.compliance}>
                 I agree to the{' '}
-                <Button variant={'text'} className={classnames.termsOfServices} asChild>
+                <Button variant={'text'} className={s.termsOfService} asChild>
                   <Link href={AUTH_ROUTES.TERMS_OF_SERVICE}>Terms of Service</Link>
                 </Button>{' '}
                 and{' '}
-                <Button variant={'text'} className={classnames.privacyPolicy} asChild>
+                <Button variant={'text'} className={s.privacyPolicy} asChild>
                   <Link href={AUTH_ROUTES.PRIVACY_POLICY}>Privacy Policy</Link>
                 </Button>
               </p>
@@ -176,16 +155,16 @@ export function SignUp() {
           <Button
             disabled={!isValid || isSubmitting}
             variant={'primary'}
-            className={classnames.signUp}
+            className={s.signUp}
             type={'submit'}
           >
             Sign Up
           </Button>
         </form>
 
-        <p className={classnames.question}>{`Do you have an account?`}</p>
+        <p className={s.question}>{`Do you have an account?`}</p>
 
-        <Button variant={'text'} className={classnames.signIn} asChild>
+        <Button variant={'text'} className={s.signIn} asChild>
           <Link href={AUTH_ROUTES.SIGN_IN}>Sign In</Link>
         </Button>
       </Card>
