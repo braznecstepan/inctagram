@@ -16,10 +16,6 @@ export const Logout = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
-  const logoutInitHandler = () => {
-    setShowModal(true)
-  }
-
   const confirmHandler = async () => {
     try {
       await logout()
@@ -36,7 +32,7 @@ export const Logout = () => {
   }
   return (
     <>
-      <Button variant="outlined" onClick={logoutInitHandler} disabled={showModal}>
+      <Button variant="outlined" onClick={() => setShowModal(true)} disabled={showModal}>
         Log out
       </Button>
       <Dialog
