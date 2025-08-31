@@ -15,6 +15,7 @@ export type ScrollbarProps = {
   type?: ScrollArea.ScrollAreaProps['type']
 } & ComponentPropsWithoutRef<'div'>
 
+/**Component Scrollbar*/
 export const Scrollbar: FC<ScrollbarProps> = ({
   children,
   className,
