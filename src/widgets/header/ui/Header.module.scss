@@ -35,13 +35,9 @@
   @include t.uik-h3-typography;
 }
 
-.logo {
-  all: unset;
-  cursor: pointer;
-
-  h1 {
-    @include t.uik-large;
-  }
+.logo h1 {
+  @include t.uik-large;
+  font-size: 26px;
 }
 
 .selectBox {
