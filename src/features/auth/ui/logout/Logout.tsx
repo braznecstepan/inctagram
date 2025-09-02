@@ -16,32 +16,31 @@ export const Logout = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
-  const confirmHandler = async () => {
+  const handleConfirmClick = async () => {
     try {
-      await logout()
-        .unwrap()
-        .then(() => {
-          dispatch(changeIsLoggedIn({ isLoggedIn: false }))
-          localStorage.removeItem('token')
-          setShowModal(false)
-          router.push(`${AUTH_ROUTES.SIGN_IN}`)
-        })
+      await logout().unwrap()
+      localStorage.removeItem('token')
+      dispatch(changeIsLoggedIn({ isLoggedIn: false }))
+      router.replace(AUTH_ROUTES.SIGN_IN)
     } catch (error: unknown) {
       handleNetworkError({ error, dispatch })
+    } finally {
+      setShowModal(false)
     }
   }
   return (
     <>
-      <Button variant="outlined" onClick={() => setShowModal(true)} disabled={showModal}>
+      <Button variant="outlined" onClick={() => setShowModal(true)}>
         Log out
       </Button>
       <Dialog
         open={showModal}
         title="Log out"
-        confirmButtonText="Yup"
+        size={'sm'}
+        confirmButtonText="Yes"
         cancelButtonText="No"
-        showCloseButton
-        onConfirmButtonClick={confirmHandler}
+        buttonsMarginTop={'18px'}
+        onConfirmButtonClick={handleConfirmClick}
         onClose={() => setShowModal(false)}
       >
         {`Do you really want to log out of your account ${userData?.email}?`}

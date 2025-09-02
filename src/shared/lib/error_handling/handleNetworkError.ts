@@ -3,6 +3,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { changeError } from '@/shared/api/base-slice'
 import { BaseResponseError } from '@/shared/types'
 
+const defaultGlobalErrorMessage = 'Oops! Something went wrong. See error in browser console'
+
 export function handleNetworkError({
   error,
   dispatch,
@@ -25,15 +27,17 @@ export function handleNetworkError({
     if (fetchError.status === 400) {
       const baseResponseError = fetchError.data as BaseResponseError
 
-      let message: string
+      let message: string = defaultGlobalErrorMessage
 
-      if (baseResponseError.messages.length > 0) {
+      if (typeof baseResponseError.messages === 'string') {
+        message = baseResponseError.messages
+      } else if (baseResponseError.messages.length > 0) {
         message = baseResponseError.messages[0].message
       } else if (baseResponseError.error) {
         message = baseResponseError.error
-      } else {
-        message = 'Something went wrong'
       }
+
+      message = message ?? defaultGlobalErrorMessage
 
       dispatch(changeError({ error: message }))
       handle400Error?.(baseResponseError)

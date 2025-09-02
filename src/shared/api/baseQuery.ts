@@ -12,6 +12,7 @@ const baseQuery = fetchBaseQuery({
 
     return headers
   },
+  credentials: 'include',
 })
 
 export const baseQueryWithReauth: BaseQueryFn<

@@ -5,6 +5,6 @@ export type ErrorMessage = {
 
 export type BaseResponseError = {
   statusCode: number
-  messages: ErrorMessage[]
+  messages: ErrorMessage[] | string
   error: string
 }
