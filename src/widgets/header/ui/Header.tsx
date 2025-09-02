@@ -21,49 +21,52 @@ export const Header = () => {
             <h1>Inctagram</h1>
           </Link>
           <div className={s.selectBox}>
-            <Tooltip side={'bottom'}>
-              <Scrollbar maxHeight={425} type={'scroll'}>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem!
-                  Animi architecto dolore dolores doloribus earum enim id illo, incidunt laudantium
-                  magni porro praesentium quaerat qui quia rerum sit.Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Ipsam, sunt, voluptatem! Animi architecto dolore
-                  dolores doloribus earum enim id illo, incidunt laudantium magni porro praesentium
-                  quaerat qui quia rerum sitLorem ipsum dolor sit amet, consectetur adipisicing
-                  elit. Ipsam, sunt, voluptatem! Animi architecto dolore dolores doloribus earum
-                  enim id illo, incidunt laudantium magni porro praesentium quaerat qui quia rerum
-                  sitLorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt,
-                  voluptatem! Animi architecto dolore dolores doloribus earum enim id illo, incidunt
-                  laudantium magni porro praesentium quaerat qui quia rerum sitLorem ipsum dolor sit
-                  amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem! Animi architecto
-                  dolore dolores doloribus earum enim id illo, incidunt laudantium magni porro
-                  praesentium quaerat qui quia rerum sitLorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Ipsam, sunt, voluptatem! Animi architecto dolore dolores
-                  doloribus earum enim id illo, incidunt laudantium magni porro praesentium quaerat
-                  qui quia rerum sitLorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam,
-                  sunt, voluptatem! Animi architecto dolore dolores doloribus earum enim id illo,
-                  incidunt laudantium magni porro praesentium quaerat qui quia rerum sitLorem ipsum
-                  dolor sit amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem! Animi
-                  architecto dolore dolores doloribus earum enim id illo, incidunt laudantium magni
-                  porro praesentium quaerat qui quia rerum sit
-                </p>
-              </Scrollbar>
-            </Tooltip>
-            <HeaderSelect />
-            {isLoggedIn ? (
-              <div className={s.buttonWrapper}>
-                <Logout />
-              </div>
-            ) : (
-              <div className={s.buttonWrapper}>
-                <Button variant={'text'} asChild>
-                  <Link href={AUTH_ROUTES.SIGN_IN}>Log in</Link>
-                </Button>
-                <Button variant={'primary'} asChild>
-                  <Link href={AUTH_ROUTES.SIGN_UP}>Sign up</Link>
-                </Button>
-              </div>
+            {isLoggedIn && (
+              <Tooltip side={'bottom'}>
+                <Scrollbar maxHeight={425} type={'scroll'}>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt,
+                    voluptatem! Animi architecto dolore dolores doloribus earum enim id illo,
+                    incidunt laudantium magni porro praesentium quaerat qui quia rerum sit.Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem!
+                    Animi architecto dolore dolores doloribus earum enim id illo, incidunt
+                    laudantium magni porro praesentium quaerat qui quia rerum sitLorem ipsum dolor
+                    sit amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem! Animi
+                    architecto dolore dolores doloribus earum enim id illo, incidunt laudantium
+                    magni porro praesentium quaerat qui quia rerum sitLorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Ipsam, sunt, voluptatem! Animi architecto dolore
+                    dolores doloribus earum enim id illo, incidunt laudantium magni porro
+                    praesentium quaerat qui quia rerum sitLorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Ipsam, sunt, voluptatem! Animi architecto dolore dolores
+                    doloribus earum enim id illo, incidunt laudantium magni porro praesentium
+                    quaerat qui quia rerum sitLorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Ipsam, sunt, voluptatem! Animi architecto dolore dolores doloribus earum
+                    enim id illo, incidunt laudantium magni porro praesentium quaerat qui quia rerum
+                    sitLorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt,
+                    voluptatem! Animi architecto dolore dolores doloribus earum enim id illo,
+                    incidunt laudantium magni porro praesentium quaerat qui quia rerum sitLorem
+                    ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, sunt, voluptatem!
+                    Animi architecto dolore dolores doloribus earum enim id illo, incidunt
+                    laudantium magni porro praesentium quaerat qui quia rerum sit
+                  </p>
+                </Scrollbar>
+              </Tooltip>
             )}
+            <HeaderSelect />
+            <div className={s.buttonWrapper}>
+              {isLoggedIn ? (
+                <Logout />
+              ) : (
+                <>
+                  <Button variant={'text'} asChild>
+                    <Link href={AUTH_ROUTES.SIGN_IN}>Log in</Link>
+                  </Button>
+                  <Button variant={'primary'} asChild>
+                    <Link href={AUTH_ROUTES.SIGN_UP}>Sign up</Link>
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </Container>

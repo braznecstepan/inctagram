@@ -98,7 +98,7 @@ export const RecoveryPassword = () => {
               Send Link
             </Button>
             <Button variant={'text'} fullWidth asChild>
-              <Link href={AUTH_ROUTES.SIGN_IN}>Back to Sigh In</Link>
+              <Link href={AUTH_ROUTES.SIGN_IN}>Back to Sign In</Link>
             </Button>
           </div>
           <ReCAPTCHA
