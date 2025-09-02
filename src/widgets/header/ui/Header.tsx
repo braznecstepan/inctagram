@@ -4,22 +4,22 @@ import { Button, Container } from '@/shared/ui'
 import { selectIsLoggedIn } from '@/shared/api/base-slice'
 import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
 import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
-import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/shared/lib/hooks'
 import { HeaderSelect } from '@/widgets/header/ui/headerSelect/HeaderSelect'
 import { Logout } from '@/features/auth/ui/logout/Logout'
+import Link from 'next/link'
+import { APP_ROUTES, AUTH_ROUTES } from '@/shared/lib/routes'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
-  const router = useRouter()
 
   return (
     <header className={s.header}>
       <Container>
         <div className={s.headerWrapper}>
-          <button type={'button'} onClick={() => router.push('/')} className={s.logo}>
+          <Link href={APP_ROUTES.ROOT} className={s.logo}>
             <h1>Inctagram</h1>
-          </button>
+          </Link>
           <div className={s.selectBox}>
             <Tooltip side={'bottom'}>
               <Scrollbar maxHeight={425} type={'scroll'}>
@@ -56,10 +56,12 @@ export const Header = () => {
               </div>
             ) : (
               <div className={s.buttonWrapper}>
-                <Button onClick={() => router.push('/auth/sign-in')} variant={'outlined'}>
-                  Log in
+                <Button variant={'text'} asChild>
+                  <Link href={AUTH_ROUTES.SIGN_IN}>Log in</Link>
                 </Button>
-                <Button onClick={() => router.push('/auth/sign-up')}>Sign up</Button>
+                <Button variant={'primary'} asChild>
+                  <Link href={AUTH_ROUTES.SIGN_UP}>Sign up</Link>
+                </Button>
               </div>
             )}
           </div>
