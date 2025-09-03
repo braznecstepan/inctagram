@@ -1,4 +1,5 @@
 'use client'
+
 import { ConfirmedImage } from '@/shared/ui/images'
 import { Button } from '@/shared/ui'
 import Link from 'next/link'

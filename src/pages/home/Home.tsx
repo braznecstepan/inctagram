@@ -3,16 +3,17 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks'
 import { selectIsLoggedIn } from '@/shared/api/base-slice'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRegistrationConfirmationMutation } from '@/entities/auth/api'
 import { handleNetworkError } from '@/shared/lib'
 
 export function Home() {
-  return (
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <PrivateHome />
-    </Suspense>
-  )
+  return null
+  // return (
+  //   <Suspense fallback={<h1>Loading...</h1>}>
+  //     <PrivateHome />
+  //   </Suspense>
+  // )
 }
 
 const PrivateHome = () => {

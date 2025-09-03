@@ -1,3 +1,5 @@
+'use client'
+
 import { EyeOffOutline, EyeOutline, GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/shared/ui/icons'
 import { Button, Card, Dialog, TextField } from '@/shared/ui'
 
@@ -23,7 +25,6 @@ const defaultValues = {
 
 export function SignUp() {
   const [showPassword, toggleShowPassword] = useBoolean(false)
-  const [showConfirmedPassword, toggleShowConfirmedPassword] = useBoolean(false)
   const [showDialog, toggleShowDialog] = useBoolean(false)
 
   const [registration] = useRegistrationMutation()
@@ -125,11 +126,11 @@ export function SignUp() {
             className={s.passwordConfirmation}
             errorMessage={errors.passwordConfirmation && errors.passwordConfirmation.message}
             {...register('passwordConfirmation')}
-            type={showConfirmedPassword ? 'text' : 'password'}
+            type={showPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
-            onEndIconClick={toggleShowConfirmedPassword}
+            iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            onEndIconClick={toggleShowPassword}
             autoComplete={'new-password'}
           />
 

@@ -6,7 +6,6 @@ import { useBoolean } from 'react-use'
 
 export const CreatePassword = () => {
   const [showPassword, toggleShowPassword] = useBoolean(false)
-  const [showConfirmedPassword, toggleShowConfirmedPassword] = useBoolean(false)
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,11 +29,11 @@ export const CreatePassword = () => {
 
           <TextField
             className={s.password}
-            type={showConfirmedPassword ? 'text' : 'password'}
+            type={showPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
-            onEndIconClick={toggleShowConfirmedPassword}
+            iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            onEndIconClick={toggleShowPassword}
             required
           />
           <span className={s.text}>{`Your password must be between 6 and 20 characters`}</span>
