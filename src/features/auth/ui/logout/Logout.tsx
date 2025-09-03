@@ -1,10 +1,8 @@
 'use client'
 import { useAppDispatch } from '@/shared/lib/hooks'
-import { useLogoutMutation, useMeQuery } from '@/entities/auth/api'
-import { useRouter } from 'next/navigation'
+import { authApi, useLogoutMutation, useMeQuery } from '@/entities/auth/api'
 import { Button, Dialog } from '@/shared/ui'
 import { handleNetworkError } from '@/shared/lib'
-import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { useState } from 'react'
 
 export const Logout = () => {
@@ -12,16 +10,18 @@ export const Logout = () => {
 
   const [logout] = useLogoutMutation()
   const { data: userData } = useMeQuery()
-  const router = useRouter()
   const dispatch = useAppDispatch()
 
   const handleConfirmClick = async () => {
     try {
       await logout().unwrap()
-      localStorage.removeItem('token')
-      router.replace(AUTH_ROUTES.SIGN_IN)
+      dispatch(authApi.util.resetApiState())
     } catch (error: unknown) {
-      handleNetworkError({ error, dispatch })
+      const handle401Error = () => {
+        dispatch(authApi.util.resetApiState())
+      }
+
+      handleNetworkError({ error, dispatch, handle401Error })
     } finally {
       setShowModal(false)
     }

@@ -18,7 +18,7 @@ const baseQuery = fetchBaseQuery({
 export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
-  FetchBaseQueryError | { status: 'REFRESH_TOKEN_FAILED' }
+  FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock() // Проверка заблокирован ли Mutex другим потоком
@@ -45,7 +45,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          return { error: { status: 'REFRESH_TOKEN_FAILED' } }
+          return { error: { status: 401, data: { error: 'Refresh token failed' } } }
         }
       } finally {
         release()
