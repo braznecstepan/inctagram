@@ -1,17 +1,16 @@
 'use client'
 import s from './Header.module.scss'
 import { Button, Container } from '@/shared/ui'
-import { selectIsLoggedIn } from '@/shared/api/base-slice'
 import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
 import { Scrollbar } from '@/shared/ui/scrollbar/Scrollbar'
-import { useAppSelector } from '@/shared/lib/hooks'
 import { HeaderSelect } from '@/widgets/header/ui/headerSelect/HeaderSelect'
 import { Logout } from '@/features/auth/ui/logout/Logout'
 import Link from 'next/link'
 import { APP_ROUTES, AUTH_ROUTES } from '@/shared/lib/routes'
+import { useMeQuery } from '@/entities/auth/api'
 
 export const Header = () => {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const { data } = useMeQuery()
 
   return (
     <header className={s.header}>
@@ -21,7 +20,7 @@ export const Header = () => {
             <h1>Inctagram</h1>
           </Link>
           <div className={s.selectBox}>
-            {isLoggedIn && (
+            {data && (
               <Tooltip side={'bottom'}>
                 <Scrollbar maxHeight={425} type={'scroll'}>
                   <p>
@@ -54,7 +53,7 @@ export const Header = () => {
             )}
             <HeaderSelect />
             <div className={s.buttonWrapper}>
-              {isLoggedIn ? (
+              {data ? (
                 <Logout />
               ) : (
                 <>

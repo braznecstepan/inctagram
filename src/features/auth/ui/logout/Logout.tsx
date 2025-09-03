@@ -1,6 +1,5 @@
 'use client'
 import { useAppDispatch } from '@/shared/lib/hooks'
-import { changeIsLoggedIn } from '@/shared/api/base-slice'
 import { useLogoutMutation, useMeQuery } from '@/entities/auth/api'
 import { useRouter } from 'next/navigation'
 import { Button, Dialog } from '@/shared/ui'
@@ -20,7 +19,6 @@ export const Logout = () => {
     try {
       await logout().unwrap()
       localStorage.removeItem('token')
-      dispatch(changeIsLoggedIn({ isLoggedIn: false }))
       router.replace(AUTH_ROUTES.SIGN_IN)
     } catch (error: unknown) {
       handleNetworkError({ error, dispatch })

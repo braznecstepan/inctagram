@@ -7,13 +7,13 @@ import { useMeQuery } from '@/entities/auth/api'
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
-  const { data } = useMeQuery()
+  const { data, isFetching } = useMeQuery()
 
   useEffect(() => {
-    if (!data) {
+    if (!isFetching && !data) {
       router.replace(AUTH_ROUTES.SIGN_IN)
     }
-  }, [data])
+  }, [isFetching, data])
 
   if (!data) {
     return null
