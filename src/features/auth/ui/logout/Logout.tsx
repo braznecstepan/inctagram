@@ -28,17 +28,18 @@ export const Logout = () => {
       setShowModal(false)
     }
   }
+
   return (
     <>
-      <Button variant="outlined" onClick={() => setShowModal(true)}>
+      <Button variant={'outlined'} onClick={() => setShowModal(true)}>
         Log out
       </Button>
       <Dialog
         open={showModal}
-        title="Log out"
+        title={'Log out'}
         size={'sm'}
-        confirmButtonText="Yes"
-        cancelButtonText="No"
+        confirmButtonText={'Yes'}
+        cancelButtonText={'No'}
         buttonsMarginTop={'18px'}
         onConfirmButtonClick={handleConfirmClick}
         onClose={() => setShowModal(false)}

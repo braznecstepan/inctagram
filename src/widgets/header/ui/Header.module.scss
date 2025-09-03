@@ -21,7 +21,7 @@
   height: var(--header-height);
   padding: 0 60px;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     padding: 0 15px;
   }
 }
@@ -36,6 +36,7 @@
 
 .logo h1 {
   @include t.uik-large;
+
   font-size: 26px;
 }
 

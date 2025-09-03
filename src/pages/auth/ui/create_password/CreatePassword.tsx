@@ -1,3 +1,5 @@
+'use client'
+
 import s from './CreatePassword.module.scss'
 import { Button, Card, TextField } from '@/shared/ui'
 import { EyeOffOutline, EyeOutline } from '@/shared/ui/icons'
