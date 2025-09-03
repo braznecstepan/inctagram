@@ -1,4 +1,5 @@
 'use client'
+
 import s from './ExpiredLink.module.scss'
 import { Button, Dialog, TextField } from '@/shared/ui'
 import { ExpiredImage } from '@/shared/ui/images'

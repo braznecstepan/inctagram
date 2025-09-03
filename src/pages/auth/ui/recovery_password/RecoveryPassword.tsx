@@ -1,4 +1,5 @@
 'use client'
+
 import { Button, Card, Dialog, TextField } from '@/shared/ui'
 import s from './RecoveryPassword.module.scss'
 import Link from 'next/link'

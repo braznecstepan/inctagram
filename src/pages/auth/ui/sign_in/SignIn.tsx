@@ -1,9 +1,10 @@
 'use client'
+
 import { EyeOffOutline, EyeOutline, GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/shared/ui/icons'
 import { Button, Card, TextField } from '@/shared/ui'
 import s from './SignIn.module.scss'
 import Link from 'next/link'
-import { AUTH_ROUTES } from '@/shared/lib/routes'
+import { AUTH_ROUTES, PROFILE_ROUTES } from '@/shared/lib/routes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema, SignInType } from '@/pages/auth/model/validation'
@@ -43,12 +44,12 @@ export function SignIn() {
         localStorage.setItem('token', res.accessToken)
         const data = await getProfile().unwrap()
 
-        if (data.firstName) {
-          router.push(`/profile/${data.id}`)
-        }
-        router.push('/profile_settings')
+        // if (data.firstName) {
+        //   router.push(`/profile/${data.id}`)
+        // }
+        dispatch(changeIsLoggedIn({ isLoggedIn: true }))
+        router.replace(PROFILE_ROUTES.SETTINGS)
       }
-      dispatch(changeIsLoggedIn({ isLoggedIn: true }))
       reset()
     } catch (error: unknown) {
       handleNetworkError({ error, dispatch })
