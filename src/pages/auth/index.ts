@@ -1,5 +1,6 @@
 export { SignIn } from './ui/sign_in/SignIn'
 export { SignUp } from './ui/sign_up/SignUp'
+export { SignUpRedirect } from './ui/sign_up/redirect/SignUpRedirect'
 export { ConfirmedEmail } from './ui/confirmed_email/ConfirmedEmail'
 export { ExpiredLink } from './ui/expired_link/ExpiredLink'
 export { RecoveryPassword } from './ui/recovery_password/RecoveryPassword'

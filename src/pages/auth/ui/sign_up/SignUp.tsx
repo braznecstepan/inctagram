@@ -51,7 +51,7 @@ export function SignUp() {
       userName: data.name,
       email: data.email,
       password: data.password,
-      baseUrl: process.env.NEXT_PUBLIC_DOMAIN ?? '',
+      baseUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/auth/sign-up/redirect`,
     }
 
     try {
