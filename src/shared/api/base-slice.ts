@@ -4,19 +4,12 @@ import { LocaleType } from '@/shared/types'
 export const baseSlice = createSlice({
   name: 'baseSlice',
   initialState: {
-    isLoggedIn: false,
     notificationStatus: false,
     error: null as string | null,
     locale: 'en' as LocaleType,
     isLoading: false,
   },
   reducers: create => ({
-    meAC: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
-      state.isLoggedIn = action.payload.isLoggedIn
-    }),
-    changeIsLoggedIn: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
-      state.isLoggedIn = action.payload.isLoggedIn
-    }),
     changeNewMessage: create.reducer<{ notificationStatus: boolean }>((state, action) => {
       state.notificationStatus = action.payload.notificationStatus
     }),
@@ -39,7 +32,6 @@ export const baseSlice = createSlice({
     })
   },
   selectors: {
-    selectIsLoggedIn: state => state.isLoggedIn,
     selectNotificationStatus: state => state.notificationStatus,
     selectError: state => state.error,
     selectLocale: state => state.locale,
@@ -47,13 +39,7 @@ export const baseSlice = createSlice({
   },
 })
 
-export const {
-  selectIsLoggedIn,
-  selectNotificationStatus,
-  selectError,
-  selectLocale,
-  selectIsLoading,
-} = baseSlice.selectors
+export const { selectNotificationStatus, selectError, selectLocale, selectIsLoading } =
+  baseSlice.selectors
 export const baseReducer = baseSlice.reducer
-export const { meAC, changeNewMessage, changeError, changeLocale, changeIsLoggedIn } =
-  baseSlice.actions
+export const { changeNewMessage, changeError, changeLocale } = baseSlice.actions

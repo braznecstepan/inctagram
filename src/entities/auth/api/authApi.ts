@@ -22,18 +22,21 @@ export const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: obj,
       }),
+      invalidatesTags: ['Me'],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: '/api/v1/auth/logout',
         method: 'POST',
       }),
+      invalidatesTags: ['Me'],
     }),
     me: builder.query<MeResponse, void>({
       query: () => ({
         url: '/api/v1/auth/me',
         method: 'GET',
       }),
+      providesTags: ['Me'],
     }),
     registration: builder.mutation<void, RegistrationArgs>({
       query: body => ({

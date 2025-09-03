@@ -13,7 +13,6 @@ import { useLoginMutation } from '@/entities/auth/api/authApi'
 import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import { useRouter } from 'next/navigation'
 import { handleNetworkError } from '@/shared/lib'
-import { changeIsLoggedIn } from '@/shared/api/base-slice'
 import { useBoolean } from 'react-use'
 
 export function SignIn() {
@@ -40,14 +39,14 @@ export function SignIn() {
     try {
       const res = await loginFunc(data).unwrap()
 
-      if (res.accessToken) {
-        localStorage.setItem('token', res.accessToken)
-        const data = await getProfile().unwrap()
+      if (!res.accessToken) return
 
-        // if (data.firstName) {
-        //   router.push(`/profile/${data.id}`)
-        // }
-        dispatch(changeIsLoggedIn({ isLoggedIn: true }))
+      localStorage.setItem('token', res.accessToken)
+      const profile = await getProfile().unwrap()
+
+      if (profile.firstName) {
+        router.replace(`/profile/${profile.id}`)
+      } else {
         router.replace(PROFILE_ROUTES.SETTINGS)
       }
       reset()
