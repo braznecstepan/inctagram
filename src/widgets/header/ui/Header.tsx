@@ -54,9 +54,7 @@ export const Header = () => {
             )}
             <HeaderSelect />
             <div className={s.buttonWrapper}>
-              {data ? (
-                <Logout />
-              ) : (
+              {!data && (
                 <>
                   <Button variant={'text'} asChild>
                     <Link href={AUTH_ROUTES.SIGN_IN}>Log in</Link>
