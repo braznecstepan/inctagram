@@ -41,7 +41,6 @@ export function SignIn() {
 
       if (!res.accessToken) return
 
-      localStorage.setItem('token', res.accessToken)
       const profile = await getProfile().unwrap()
 
       if (profile.firstName) {

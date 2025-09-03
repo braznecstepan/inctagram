@@ -1,4 +1,5 @@
 'use client'
+
 import s from './Header.module.scss'
 import { Button, Container } from '@/shared/ui'
 import { Tooltip } from '@/shared/ui/tooltip/Tooltip'
