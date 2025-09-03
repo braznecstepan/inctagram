@@ -4,6 +4,8 @@ import { PropsWithChildren, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { useMeQuery } from '@/entities/auth/api'
+import {Sidebar} from "@/widgets/sidebar";
+import s from './baseLayout.module.scss'
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
@@ -19,5 +21,10 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
     return null
   }
 
-  return <main>{children}</main>
+  return (
+      <div className={s.mainLayout}>
+      <Sidebar />
+      <main>{children}</main>
+      </div>
+  )
 }
