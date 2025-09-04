@@ -10,49 +10,55 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/shared/ui/icons'
-import {SidebarItem} from "@/widgets/sidebar";
+import { SidebarItem } from '@/widgets/sidebar'
 
 export const Sidebar = () => {
   return (
     <nav className={s.sidebar} aria-label="Main navigation">
-      <div>
-        <div className={s.main}>
-          <SidebarItem title={'Feed'} href={'/feed'}>
-            <HomeOutline />
-          </SidebarItem>
+        <div>
+          <div className={s.main}>
+            <SidebarItem
+                title={'Feed'}
+                href={'/feed'}
+                startDecoration={<HomeOutline />} />
+            <SidebarItem
+                title={'Create'}
+                href={'/post'}
+                startDecoration={<PlusSquareOutline />} />
+            <SidebarItem
+              title={'My Profile'}
+              href={'/profile'}
+              startDecoration={<PersonOutline />}
+            />
+            <SidebarItem
+              title={'Messenger'}
+              href={'/messenger'}
+              startDecoration={<MessageCircleOutline />}
+            />
+            <SidebarItem
+                title={'Search'}
+                href={'/search'}
+                startDecoration={<SearchOutline />} />
+          </div>
 
-          <SidebarItem title={'Create'} href={'/post'}>
-            <PlusSquareOutline />
-          </SidebarItem>
-
-          <SidebarItem title={'My Profile'} href={'/profile'}>
-            <PersonOutline />
-          </SidebarItem>
-
-          <SidebarItem title={'Messenger'} href={'/messenger'}>
-            <MessageCircleOutline />
-          </SidebarItem>
-
-          <SidebarItem title={'Search'} href={'/search'}>
-            <SearchOutline />
-          </SidebarItem>
+          <div className={s.list}>
+            <SidebarItem
+              title={'Statistics'}
+              href={'/statistics'}
+              startDecoration={<TrendingUpOutline />}
+            />
+            <SidebarItem
+              title={'Favorites'}
+              href={'/favorites'}
+              startDecoration={<BookmarkOutline />}
+            />
+          </div>
         </div>
 
-        <div className={s.list}>
-          <SidebarItem title={'Statistics'} href={'/statistics'}>
-            <TrendingUpOutline />
-          </SidebarItem>
-
-          <SidebarItem title={'Favorites'} href={'/favorites'}>
-            <BookmarkOutline />
-          </SidebarItem>
+        <div className={s.logout}>
+          <LogOutOutline aria-label="Log out" />
+          <Logout className={s.logoutBtn} />
         </div>
-      </div>
-
-      <div className={s.logout}>
-        <LogOutOutline aria-label="Log out" />
-        <Logout className={s.logoutBtn} />
-      </div>
     </nav>
   )
 }
