@@ -5,7 +5,11 @@ import { Button, Dialog } from '@/shared/ui'
 import { handleNetworkError } from '@/shared/lib'
 import { useState } from 'react'
 
-export const Logout = () => {
+type LogoutProps = {
+  className?: string
+}
+
+export const Logout = ({className} : LogoutProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
 
   const [logout] = useLogoutMutation()
@@ -29,7 +33,7 @@ export const Logout = () => {
 
   return (
     <>
-      <Button variant={'outlined'} onClick={() => setShowModal(true)}>
+      <Button className={className} variant={'text'} onClick={() => setShowModal(true)}>
         Log out
       </Button>
       <Dialog
