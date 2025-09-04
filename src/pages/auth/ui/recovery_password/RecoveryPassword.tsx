@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
+import { useLazyGetProfileQuery } from '@/entities/profile/api/profileApi'
 import dynamic from 'next/dynamic'
 
 const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
@@ -23,6 +24,7 @@ export const RecoveryPassword = () => {
 
   console.log(recaptchaToken)
   const [recoveryPassword] = useRecoveryPasswordMutation()
+  const [getProfile] = useLazyGetProfileQuery()
   const dispatch = useAppDispatch()
   const {
     watch,
@@ -53,8 +55,13 @@ export const RecoveryPassword = () => {
     }
 
     try {
-      await recoveryPassword(obj)
-      setModalOpen(true)
+      const profile = await getProfile().unwrap()
+      if (profile.userName) {
+        await recoveryPassword(obj)
+        setModalOpen(true)
+      } else {
+        dispatch(changeError({ error: "User with this email doesn't exist" }))
+      }
     } catch {
       dispatch(changeError({ error: 'Ошибка обработки reCaptcha' }))
     }

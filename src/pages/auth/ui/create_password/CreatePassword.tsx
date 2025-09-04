@@ -85,7 +85,7 @@ export const CreatePassword = () => {
             placeholder={'••••••••••'}
             label={'Password confirmation'}
             iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
-            onEndIconClick={toggleShowPassword}
+            onEndIconClick={toggleShowConfirmedPassword}
             required
           />
           <span className={s.text}>{`Your password must be between 6 and 20 characters`}</span>
