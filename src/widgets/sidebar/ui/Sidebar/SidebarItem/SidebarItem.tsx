@@ -6,16 +6,16 @@ import { ReactNode } from 'react'
 type Props = {
   title: string
   href: string
-  children: ReactNode
+  startDecoration: ReactNode
 }
 
-export const SidebarItem = ({ title, href, children }: Props) => {
+export const SidebarItem = ({ title, href, startDecoration }: Props) => {
   const pathname = usePathname()
   const isActive = pathname === href
 
   return (
     <Link href={href} className={`${s.link} ${isActive ? s.active : ''}`} aria-label={title}>
-      {children}
+      {startDecoration}
       {title}
     </Link>
   )
