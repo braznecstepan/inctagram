@@ -28,7 +28,6 @@ export const CreatePassword = () => {
             onEndIconClick={toggleShowPassword}
             required
           />
-
           <TextField
             className={s.password}
             type={showPassword ? 'text' : 'password'}

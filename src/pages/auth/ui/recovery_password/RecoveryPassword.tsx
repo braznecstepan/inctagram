@@ -20,6 +20,8 @@ const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
 export const RecoveryPassword = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+
+  console.log(recaptchaToken)
   const [recoveryPassword] = useRecoveryPasswordMutation()
   const dispatch = useAppDispatch()
   const {
@@ -33,7 +35,7 @@ export const RecoveryPassword = () => {
       email: '',
     },
     resolver: zodResolver(recoveryPasswordSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   })
   const value = watch().email
 
@@ -47,7 +49,7 @@ export const RecoveryPassword = () => {
     const obj = {
       email: data.email,
       recaptcha: recaptchaToken,
-      baseUrl: process.env.NEXT_PUBLIC_DOMAIN!,
+      baseUrl: process.env.NEXT_PUBLIC_BASEURL!,
     }
 
     try {
@@ -94,20 +96,21 @@ export const RecoveryPassword = () => {
             Enter your email address and we will send you further instructions{' '}
           </p>
           <div className={s.buttonBox}>
-            <Button disabled={!value || !recaptchaToken} type={'submit'} fullWidth>
+            <Button disabled={!!errors.email || !recaptchaToken} type={'submit'} fullWidth>
               Send Link
             </Button>
             <Button variant={'text'} fullWidth asChild>
               <Link href={AUTH_ROUTES.SIGN_IN}>Back to Sign In</Link>
             </Button>
           </div>
-          <ReCAPTCHA
-            size={'normal'}
-            onChange={handleRecaptchaChange}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-            className={s.recaptcha}
-            theme={'dark'}
-          />
+          <div data-theme={'dark'}>
+            <ReCAPTCHA
+              size={'normal'}
+              onChange={handleRecaptchaChange}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              className={s.recaptcha}
+            />
+          </div>
         </form>
       </Card>
     </div>
