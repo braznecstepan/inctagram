@@ -41,16 +41,20 @@ export const CreatePassword = () => {
   const handleFormSubmit: SubmitHandler<NewPasswordType> = async data => {
     alert('New paswword is created')
 
+    if (code) {
+      router.push(AUTH_ROUTES.CREATE_PASSWORD)
+      return
+    }
+
     const obj = {
       newPassword: data.password,
       recoveryCode: code as string,
     }
 
     try {
-      if (obj.recoveryCode) {
-        await createNewPassword(obj).unwrap()
-        router.push(AUTH_ROUTES.CREATE_PASSWORD)
-      }
+      await createNewPassword(obj).unwrap()
+      router.push(AUTH_ROUTES.SIGN_IN)
+      sessionStorage.clear()
     } catch (error: unknown) {
       handleNetworkError({ error, dispatch })
       router.push(AUTH_ROUTES.EXPIRED_LINK)
@@ -75,7 +79,7 @@ export const CreatePassword = () => {
           />
           <TextField
             className={s.password}
-            {...register('password')}
+            {...register('passwordConfirmation')}
             errorMessage={errors.passwordConfirmation && errors.passwordConfirmation.message}
             type={showConfirmedPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
