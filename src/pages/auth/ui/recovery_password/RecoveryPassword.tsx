@@ -10,14 +10,13 @@ import { recoveryPasswordSchema, RecoveryPasswordType } from '@/pages/auth/model
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
-import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
-//import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 
-// const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
-//   ssr: false,
-//   loading: () => <div>Загрузка</div>,
-// })
+const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
+  ssr: false,
+})
+
 export const RecoveryPassword = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
