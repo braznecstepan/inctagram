@@ -1,0 +1,21 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  width: 220px;
+  padding: 49px 0 12px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 228px;
+  margin-bottom: 60px;
+}
+
+.select {
+  margin-bottom: 24px;
+}
