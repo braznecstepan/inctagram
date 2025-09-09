@@ -20,7 +20,7 @@
   margin-bottom: 60px;
 }
 
-.link, .logoutBtn, .logout {
+.link, .logoutBtn, .logout, .create, .createBtn {
   display: flex;
   gap: 10px;
 
@@ -32,11 +32,9 @@
   }
 }
 
-.logoutBtn {
-  width: 100%;
+.logoutBtn, .createBtn {
   height: auto;
   padding: 0;
-  margin-left: 5px;
   transition: linear var(--transition-duration);
 
   &:hover {
