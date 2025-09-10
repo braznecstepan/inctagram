@@ -17,6 +17,7 @@ export const Sidebar = () => {
 
   const mainLinks = [
     { title: 'Feed', href: '/feed', icon: <HomeOutline /> },
+    { title: 'Create', href: '/create', icon: <PlusSquareOutline /> },
     { title: 'My Profile', href: '/profile', icon: <PersonOutline /> },
     { title: 'Messenger', href: '/messenger', icon: <MessageCircleOutline /> },
     { title: 'Search', href: '/search', icon: <SearchOutline /> },
@@ -31,31 +32,38 @@ export const Sidebar = () => {
     <nav className={s.sidebar} aria-label="Main navigation">
       <div>
         <div className={s.main}>
-          <SidebarItem title={'Feed'} href={'/feed'} startDecoration={<HomeOutline />} />
-          <div className={s.create}>
-            <PlusSquareOutline />
-            <CreatePublication title={'Create'} className={s.createBtn}/>
-          </div>
-          <SidebarItem title={'My Profile'} href={'/profile'} startDecoration={<PersonOutline />} />
-          <SidebarItem
-            title={'Messenger'}
-            href={'/messenger'}
-            startDecoration={<MessageCircleOutline />}
-          />
-          <SidebarItem title={'Search'} href={'/search'} startDecoration={<SearchOutline />} />
+          {mainLinks.map(({ title, href, icon }) => {
+                if (title === 'Create') {
+                  return (
+                      <div className={s.create} key={href}>
+                        <PlusSquareOutline/>
+                        <CreatePublication title={title} className={s.createBtn}/>
+                      </div>
+                  )
+                } else {
+                  return (
+                      <SidebarItem
+                          key={href}
+                          title={title}
+                          href={href}
+                          startDecoration={icon}
+                      />
+                  )
+                }
+          })}
         </div>
 
         <div className={s.list}>
-          <SidebarItem
-            title={'Statistics'}
-            href={'/statistics'}
-            startDecoration={<TrendingUpOutline />}
-          />
-          <SidebarItem
-            title={'Favorites'}
-            href={'/favorites'}
-            startDecoration={<BookmarkOutline />}
-          />
+          {extraLinks.map(link => {
+            return (
+                <SidebarItem
+                    key={link.href}
+                    title={link.title}
+                    href={link.href}
+                    startDecoration={link.icon}
+                />
+            )
+          })}
         </div>
       </div>
 
