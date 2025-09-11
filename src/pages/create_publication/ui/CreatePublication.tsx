@@ -1,3 +1,4 @@
+'use client'
 import {Button, Card, Modal} from '@/shared/ui'
 import { useState } from 'react'
 import s from './CreatePublication.module.scss'
@@ -9,7 +10,7 @@ type Props = {
 }
 
 export function CreatePublication({ title, className }: Props) {
-  const [isShowModal, setShowModal] = useState<boolean>(false)
+  const [isShowModal, setShowModal] = useState<boolean>(true)
 
   const toggleModal = () => setShowModal(prev => !prev)
 

@@ -1,1 +1,1 @@
-export { CreatePublication } from './CreatePublication'
+export { CreatePublication } from './ui/CreatePublication'
