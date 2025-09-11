@@ -15,6 +15,15 @@ export const AUTH_ROUTES = {
   PRIVACY_POLICY: `${APP_ROUTES.AUTH}/privacy-policy`,
 }
 
+export const SIDEBAR_ROUTES = {
+  FEED: `${APP_ROUTES.ROOT}feed`,
+  CREATE: `${APP_ROUTES.ROOT}create_publication`,
+  MESSENGER: `${APP_ROUTES.ROOT}messenger`,
+  SEARCH: `${APP_ROUTES.ROOT}search`,
+  STATISTICS: `${APP_ROUTES.ROOT}statistics`,
+  FAVORITE: `${APP_ROUTES.ROOT}favorites`
+}
+
 export const PROFILE_ROUTES = {
   SETTINGS: `${APP_ROUTES.PROFILE}/settings`,
 }

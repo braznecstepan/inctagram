@@ -33,8 +33,6 @@
 }
 
 .logoutBtn, .createBtn {
-  height: auto;
-  padding: 0;
   transition: linear var(--transition-duration);
 
   &:hover {

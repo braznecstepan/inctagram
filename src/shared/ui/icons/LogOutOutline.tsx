@@ -3,7 +3,7 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgLogOutOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     xmlns={'http://www.w3.org/2000/svg'}
-    width={30}
+    width={24}
     height={24}
     fill={'none'}
     ref={ref}
