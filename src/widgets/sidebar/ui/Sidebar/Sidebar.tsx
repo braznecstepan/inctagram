@@ -1,5 +1,4 @@
 import s from './Sidebar.module.scss'
-import { Logout } from '@/features/auth'
 import {
   BookmarkOutline,
   HomeOutline,
@@ -11,21 +10,26 @@ import {
   TrendingUpOutline,
 } from '@/shared/ui/icons'
 import { SidebarItem } from '@/widgets/sidebar'
-import { CreatePublication } from '@/pages/create_publication'
+import { APP_ROUTES, SIDEBAR_ROUTES } from '@/shared/lib/routes'
+import { Dialog } from '@/shared/ui'
+import { useState } from 'react'
+import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 
 export const Sidebar = () => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const { onLogout, userData } = useLogout()
 
   const mainLinks = [
-    { title: 'Feed', href: '/feed', icon: <HomeOutline /> },
-    { title: 'Create', href: '/create', icon: <PlusSquareOutline /> },
-    { title: 'My Profile', href: '/profile', icon: <PersonOutline /> },
-    { title: 'Messenger', href: '/messenger', icon: <MessageCircleOutline /> },
-    { title: 'Search', href: '/search', icon: <SearchOutline /> },
+    { title: 'Feed', href: `${SIDEBAR_ROUTES.FEED}`, icon: <HomeOutline /> },
+    { title: 'Create', href: `${SIDEBAR_ROUTES.CREATE}`, icon: <PlusSquareOutline /> },
+    { title: 'My Profile', href: `${APP_ROUTES.PROFILE}`, icon: <PersonOutline /> },
+    { title: 'Messenger', href: `${SIDEBAR_ROUTES.MESSENGER}`, icon: <MessageCircleOutline /> },
+    { title: 'Search', href: `${SIDEBAR_ROUTES.SEARCH}`, icon: <SearchOutline /> },
   ]
 
   const extraLinks = [
-    { title: 'Statistics', href: '/statistics', icon: <TrendingUpOutline /> },
-    { title: 'Favorites', href: '/favorites', icon: <BookmarkOutline /> },
+    { title: 'Statistics', href: `${SIDEBAR_ROUTES.STATISTICS}`, icon: <TrendingUpOutline /> },
+    { title: 'Favorites', href: `${SIDEBAR_ROUTES.FAVORITE}`, icon: <BookmarkOutline /> },
   ]
 
   return (
@@ -33,44 +37,44 @@ export const Sidebar = () => {
       <div>
         <div className={s.main}>
           {mainLinks.map(({ title, href, icon }) => {
-                if (title === 'Create') {
-                  return (
-                      <div className={s.create} key={href}>
-                        <PlusSquareOutline/>
-                        <CreatePublication title={title} className={s.createBtn}/>
-                      </div>
-                  )
-                } else {
-                  return (
-                      <SidebarItem
-                          key={href}
-                          title={title}
-                          href={href}
-                          startDecoration={icon}
-                      />
-                  )
-                }
+            return <SidebarItem key={href} title={title} href={href} startDecoration={icon} />
           })}
         </div>
 
         <div className={s.list}>
           {extraLinks.map(link => {
             return (
-                <SidebarItem
-                    key={link.href}
-                    title={link.title}
-                    href={link.href}
-                    startDecoration={link.icon}
-                />
+              <SidebarItem
+                key={link.href}
+                title={link.title}
+                href={link.href}
+                startDecoration={link.icon}
+              />
             )
           })}
         </div>
       </div>
 
       <div className={s.logout}>
-        <LogOutOutline aria-label="Log out" />
-        <Logout className={s.logoutBtn} />
+        <SidebarItem
+          className={s.logoutBtn}
+          title={'Logout'}
+          onclick={() => setShowModal(true)}
+          startDecoration={<LogOutOutline aria-label="Log out" />}
+        />
       </div>
+      <Dialog
+        open={showModal}
+        title={'Log out'}
+        size={'sm'}
+        confirmButtonText={'Yes'}
+        cancelButtonText={'No'}
+        buttonsMarginTop={'18px'}
+        onConfirmButtonClick={onLogout}
+        onClose={() => setShowModal(false)}
+      >
+        {`Do you really want to log out of your account ${userData?.email}?`}
+      </Dialog>
     </nav>
   )
 }
