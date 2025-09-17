@@ -38,18 +38,22 @@ export const CreatePassword = () => {
 
   const code = searchParams?.get('code')
 
+  if (code) {
+    router.replace(AUTH_ROUTES.CREATE_PASSWORD)
+    return
+  }
   const handleFormSubmit: SubmitHandler<NewPasswordType> = async data => {
     alert('New paswword is created')
 
-    if (code) {
-      router.push(AUTH_ROUTES.CREATE_PASSWORD)
-      return
-    }
-
     const obj = {
       newPassword: data.password,
-      recoveryCode: code as string,
+      recoveryCode: '',
     }
+
+    // if (obj.recoveryCode || email) {
+    //   router.push(AUTH_ROUTES.CREATE_PASSWORD)
+    //   return
+    // }
 
     try {
       await createNewPassword(obj).unwrap()
