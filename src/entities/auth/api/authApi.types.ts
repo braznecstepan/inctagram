@@ -29,3 +29,8 @@ export type RegistrationEmailResendingArgs = {
   email: string
   baseUrl: string
 }
+
+export type CreateNewPasswordRequest = {
+  newPassword: string
+  recoveryCode: string
+}

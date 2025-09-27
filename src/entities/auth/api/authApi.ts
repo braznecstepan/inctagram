@@ -1,5 +1,6 @@
 import { baseApi } from '@/shared/api'
 import {
+  CreateNewPasswordRequest,
   LoginRequest,
   LoginResponse,
   MeResponse,
@@ -66,6 +67,13 @@ export const authApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    createNewPassword: builder.mutation<void, CreateNewPasswordRequest>({
+      query: body => ({
+        url: '/api/v1/auth/new-password',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -77,5 +85,6 @@ export const {
   useRegistrationConfirmationMutation,
   useRegistrationEmailResendingMutation,
   useRecoveryPasswordMutation,
+  useCreateNewPasswordMutation,
   useLogoutMutation,
 } = authApi
