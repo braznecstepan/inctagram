@@ -30,7 +30,7 @@ export type RegistrationEmailResendingArgs = {
   baseUrl: string
 }
 
-export type CreateNewPasswortRequest = {
+export type CreateNewPasswordRequest = {
   newPassword: string
   recoveryCode: string
 }

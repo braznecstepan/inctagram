@@ -8,18 +8,19 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCreateNewPasswordMutation } from '@/entities/auth/api/authApi'
 import { newPasswordSchema, NewPasswordType } from '../../model/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { redirect, useRouter, useSearchParams } from 'next/navigation'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { handleNetworkError } from '@/shared/lib'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
+import { useCallback } from 'react'
 
 export const CreatePassword = () => {
   const [showPassword, toggleShowPassword] = useBoolean(false)
   const [showConfirmedPassword, toggleShowConfirmedPassword] = useBoolean(false)
-  const searchParams = useSearchParams()
   const [createNewPassword] = useCreateNewPasswordMutation()
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const {
     watch,
@@ -33,37 +34,35 @@ export const CreatePassword = () => {
       passwordConfirmation: '',
     },
     resolver: zodResolver(newPasswordSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   })
 
-  const code = searchParams?.get('code')
+  const code = searchParams?.get('code') || ''
 
-  if (code) {
-    router.replace(AUTH_ROUTES.CREATE_PASSWORD)
-    return
+  if (!code) {
+    redirect(AUTH_ROUTES.EXPIRED_LINK)
   }
-  const handleFormSubmit: SubmitHandler<NewPasswordType> = async data => {
-    alert('New paswword is created')
 
-    const obj = {
-      newPassword: data.password,
-      recoveryCode: '',
-    }
+  const handleFormSubmit: SubmitHandler<NewPasswordType> = useCallback(
+    async data => {
+      alert('New paswword is created')
 
-    // if (obj.recoveryCode || email) {
-    //   router.push(AUTH_ROUTES.CREATE_PASSWORD)
-    //   return
-    // }
+      const obj = {
+        newPassword: data.password,
+        recoveryCode: code,
+      }
 
-    try {
-      await createNewPassword(obj).unwrap()
-      router.push(AUTH_ROUTES.SIGN_IN)
-      sessionStorage.clear()
-    } catch (error: unknown) {
-      handleNetworkError({ error, dispatch })
-      router.push(AUTH_ROUTES.EXPIRED_LINK)
-    }
-  }
+      try {
+        await createNewPassword(obj).unwrap()
+        sessionStorage.clear()
+        router.push(AUTH_ROUTES.SIGN_IN)
+      } catch (error: unknown) {
+        handleNetworkError({ error, dispatch })
+        // router.push(AUTH_ROUTES.EXPIRED_LINK)
+      }
+    },
+    [createNewPassword, router, dispatch, code]
+  )
 
   return (
     <div className={s.box}>
@@ -88,7 +87,7 @@ export const CreatePassword = () => {
             type={showConfirmedPassword ? 'text' : 'password'}
             placeholder={'••••••••••'}
             label={'Password confirmation'}
-            iconEnd={showPassword ? <EyeOutline /> : <EyeOffOutline />}
+            iconEnd={showConfirmedPassword ? <EyeOutline /> : <EyeOffOutline />}
             onEndIconClick={toggleShowConfirmedPassword}
             required
           />
