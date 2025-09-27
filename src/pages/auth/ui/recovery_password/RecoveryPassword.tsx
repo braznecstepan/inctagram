@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/shared/lib/hooks'
 import { changeError } from '@/shared/api/base-slice'
 import { useRecoveryPasswordMutation } from '@/entities/auth/api/authApi'
 import dynamic from 'next/dynamic'
+import { handleNetworkError } from '@/shared/lib'
 
 const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
   ssr: false,
@@ -22,6 +23,7 @@ export const RecoveryPassword = () => {
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
   const [recoveryPassword] = useRecoveryPasswordMutation()
   const dispatch = useAppDispatch()
+
   const {
     watch,
     register,
@@ -47,14 +49,14 @@ export const RecoveryPassword = () => {
     const obj = {
       email: data.email,
       recaptcha: recaptchaToken,
-      baseUrl: process.env.NEXT_PUBLIC_BASEURL!,
+      baseUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/auth/recovery/create-password`,
     }
 
     try {
-      await recoveryPassword(obj)
+      await recoveryPassword(obj).unwrap()
       setModalOpen(true)
-    } catch {
-      dispatch(changeError({ error: 'Ошибка обработки reCaptcha' }))
+    } catch (error: unknown) {
+      handleNetworkError({ error, dispatch })
     }
   }
 
