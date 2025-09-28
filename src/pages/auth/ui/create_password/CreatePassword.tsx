@@ -54,11 +54,9 @@ export const CreatePassword = () => {
 
       try {
         await createNewPassword(obj).unwrap()
-        sessionStorage.clear()
         router.push(AUTH_ROUTES.SIGN_IN)
       } catch (error: unknown) {
         handleNetworkError({ error, dispatch })
-        // router.push(AUTH_ROUTES.EXPIRED_LINK)
       }
     },
     [createNewPassword, router, dispatch, code]
