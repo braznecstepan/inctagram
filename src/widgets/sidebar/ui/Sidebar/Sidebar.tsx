@@ -33,7 +33,7 @@ export const Sidebar = () => {
   ]
 
   return (
-    <nav className={s.sidebar} aria-label="Main navigation">
+    <nav className={s.sidebar} aria-label={'Main navigation'}>
       <div>
         <div className={s.main}>
           {mainLinks.map(({ title, href, icon }) => {
@@ -60,7 +60,7 @@ export const Sidebar = () => {
           className={s.logoutBtn}
           title={'Logout'}
           onclick={() => setShowModal(true)}
-          startDecoration={<LogOutOutline aria-label="Log out" />}
+          startDecoration={<LogOutOutline aria-label={'Log out'} />}
         />
       </div>
       <Dialog

@@ -4,7 +4,7 @@ import { PropsWithChildren, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { AUTH_ROUTES } from '@/shared/lib/routes'
 import { useMeQuery } from '@/entities/auth/api'
-import {Sidebar} from "@/widgets/sidebar";
+import { Sidebar } from '@/widgets/sidebar'
 import s from './baseLayout.module.scss'
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
@@ -22,9 +22,9 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   }
 
   return (
-      <div className={s.mainLayout}>
+    <div className={s.mainLayout}>
       <Sidebar />
       <main>{children}</main>
-      </div>
+    </div>
   )
 }

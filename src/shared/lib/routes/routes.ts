@@ -21,7 +21,7 @@ export const SIDEBAR_ROUTES = {
   MESSENGER: `${APP_ROUTES.ROOT}messenger`,
   SEARCH: `${APP_ROUTES.ROOT}search`,
   STATISTICS: `${APP_ROUTES.ROOT}statistics`,
-  FAVORITE: `${APP_ROUTES.ROOT}favorites`
+  FAVORITE: `${APP_ROUTES.ROOT}favorites`,
 }
 
 export const PROFILE_ROUTES = {
