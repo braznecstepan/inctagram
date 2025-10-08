@@ -1,0 +1,39 @@
+.roundedPhoto {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  .image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Варианты тени
+  &.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  // Эффекты при наведении
+  &.hover-scale {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &.hover-shadow {
+    &:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  // Гарантируем, что изображение заполняет контейнер
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
